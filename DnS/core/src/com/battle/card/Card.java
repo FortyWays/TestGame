@@ -1,23 +1,28 @@
 package com.battle.card;
 
-import com.badlogic.gdx.graphics.Texture;
+
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.battle.player.BattleEntity;
 import com.fortyways.state.BattleState;
 
-public abstract class Card {
+
+public class Card {
 	public int spcost;
 	public int mpcost;
 	public String cardId;
+	public String description="";
 	public TextureRegion cardArt;
-	public CardEffectAttributes[] CardInstructions;
-	
-	public Card(int spcost,int mpcost,String cardId,TextureRegion cardArt){
+	public CardEffectAttributes[] cardInstructions;
+	public int requiredDP=0;
+
+	public Card(int spcost,int mpcost,String cardId,
+			TextureRegion cardArt,CardEffectAttributes[] instructions){
 		this.spcost=spcost;
 		this.mpcost=mpcost;
 		this.cardId=cardId;
 		this.cardArt=cardArt;
-		GetCardInstructions();
+		this.cardInstructions=instructions;
 	}
 	
 	public boolean IsPlayable(int cursp,int curmp){
@@ -31,13 +36,44 @@ public abstract class Card {
 	}
 	public void Play(BattleEntity caster,BattleEntity target){
 		ApplyCost(caster);
-		CardEffects.GetEffect(caster,target, CardInstructions);
+		CardEffects.GetEffect(caster,target, cardInstructions);
 	}
-	abstract void GetCardInstructions();
+	public void Play(BattleEntity caster, BattleState state){
+		ApplyCost(caster);
+		CardEffects.GetEffect(caster,state, cardInstructions);
+	}
+
+	
+	public boolean CheckCost(BattleEntity ent){
+		if(ent.getMp()>=mpcost&&ent.getSp()>=spcost){
+		return true;
+		}
+		else{
+		return false;
+		}
+	};
 	public void ApplyCost(BattleEntity ent){
 		ent.ChangeSP(-spcost);
 		ent.ChangeMP(-mpcost);
-	};
+	}
 	
+	public String needsTarget(){
+		return cardInstructions[0].needsTarget;
+	}
+	public boolean HasDraw(){
+		for(CardEffectAttributes cea: cardInstructions){
+			if(cea.effectid=="drawself"){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean CheckDarkPresence(int darkPresence) {
+		if(darkPresence>=requiredDP){
+			return true;
+		}
+		return false;
+	}
 	
 }
