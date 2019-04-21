@@ -3,24 +3,1081 @@ pack.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+Bottom
+  rotate: false
+  xy: 1, 391
+  size: 800, 120
+  orig: 800, 120
+  offset: 0, 0
+  index: -1
+Top
+  rotate: false
+  xy: 1, 329
+  size: 800, 60
+  orig: 800, 60
+  offset: 0, 0
+  index: -1
+Background
+  rotate: false
+  xy: 803, 391
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+Background1
+  rotate: false
+  xy: 1, 207
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+Bottom2
+  rotate: false
+  xy: 803, 359
+  size: 200, 30
+  orig: 200, 30
+  offset: 0, 0
+  index: -1
+Top2
+  rotate: false
+  xy: 1, 190
+  size: 200, 15
+  orig: 200, 15
+  offset: 0, 0
+  index: -1
+DeathAnimation
+  rotate: false
+  xy: 203, 307
+  size: 186, 20
+  orig: 186, 20
+  offset: 0, 0
+  index: -1
+Deck
+  rotate: false
+  xy: 1, 68
+  size: 80, 120
+  orig: 80, 120
+  offset: 0, 0
+  index: -1
+Font
+  rotate: false
+  xy: 803, 350
+  size: 182, 7
+  orig: 182, 7
+  offset: 0, 0
+  index: -1
+DarkPresence
+  rotate: false
+  xy: 203, 286
+  size: 160, 19
+  orig: 160, 19
+  offset: 0, 0
+  index: -1
+OutOfCards
+  rotate: false
+  xy: 391, 312
+  size: 160, 15
+  orig: 160, 15
+  offset: 0, 0
+  index: -1
+RangerSprite2
+  rotate: false
+  xy: 203, 262
+  size: 150, 22
+  orig: 150, 22
+  offset: 0, 0
+  index: -1
+Panel1
+  rotate: false
+  xy: 83, 128
+  size: 100, 60
+  orig: 100, 60
+  offset: 0, 0
+  index: -1
+tempLogo
+  rotate: false
+  xy: 203, 210
+  size: 100, 50
+  orig: 100, 50
+  offset: 0, 0
+  index: -1
+BlueBar2
+  rotate: false
+  xy: 803, 318
+  size: 116, 30
+  orig: 116, 30
+  offset: 0, 0
+  index: -1
+BlueNumbers
+  rotate: false
+  xy: 553, 312
+  size: 120, 15
+  orig: 120, 15
+  offset: 0, 0
+  index: -1
+GreenNumbers
+  rotate: false
+  xy: 675, 312
+  size: 120, 15
+  orig: 120, 15
+  offset: 0, 0
+  index: -1
+GreenBar2
+  rotate: false
+  xy: 83, 96
+  size: 116, 30
+  orig: 116, 30
+  offset: 0, 0
+  index: -1
+HealthBar
+  rotate: false
+  xy: 83, 64
+  size: 116, 30
+  orig: 116, 30
+  offset: 0, 0
+  index: -1
+PurpleNumbers
+  rotate: false
+  xy: 391, 295
+  size: 120, 15
+  orig: 120, 15
+  offset: 0, 0
+  index: -1
+RedNumbers
+  rotate: false
+  xy: 513, 295
+  size: 120, 15
+  orig: 120, 15
+  offset: 0, 0
+  index: -1
+YellowNumbers
+  rotate: false
+  xy: 635, 295
+  size: 120, 15
+  orig: 120, 15
+  offset: 0, 0
+  index: -1
+HeroButton
+  rotate: false
+  xy: 203, 178
+  size: 116, 30
+  orig: 116, 30
+  offset: 0, 0
+  index: -1
+InventoryButton
+  rotate: false
+  xy: 185, 146
+  size: 116, 30
+  orig: 116, 30
+  offset: 0, 0
+  index: -1
+SelectATarget
+  rotate: false
+  xy: 185, 129
+  size: 100, 15
+  orig: 100, 15
+  offset: 0, 0
+  index: -1
+DarkPresenceSign
+  rotate: false
+  xy: 1, 36
+  size: 80, 30
+  orig: 80, 30
+  offset: 0, 0
+  index: -1
+ManaBar
+  rotate: false
+  xy: 83, 32
+  size: 116, 30
+  orig: 116, 30
+  offset: 0, 0
+  index: -1
+AutomatonAttack2Card
+  rotate: false
+  xy: 201, 47
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+map1
+  rotate: false
+  xy: 305, 210
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+RedBar2
+  rotate: false
+  xy: 797, 286
+  size: 116, 30
+  orig: 116, 30
+  offset: 0, 0
+  index: -1
+AutomatonAttackCard
+  rotate: false
+  xy: 253, 47
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+ShootAnimationpng
+  rotate: false
+  xy: 201, 23
+  size: 115, 22
+  orig: 115, 22
+  offset: 0, 0
+  index: -1
+Bleeding
+  rotate: false
+  xy: 1, 19
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+StaminaBar
+  rotate: false
+  xy: 365, 263
+  size: 116, 30
+  orig: 116, 30
+  offset: 0, 0
+  index: -1
+Blocked
+  rotate: false
+  xy: 1, 2
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+Cured
+  rotate: false
+  xy: 83, 15
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+EnemySprite2
+  rotate: false
+  xy: 165, 1
+  size: 69, 20
+  orig: 69, 20
+  offset: 0, 0
+  index: -1
+CultistIdle
+  rotate: false
+  xy: 236, 1
+  size: 60, 20
+  orig: 60, 20
+  offset: 0, 0
+  index: -1
+SlimeBoyIdle
+  rotate: false
+  xy: 298, 1
+  size: 60, 20
+  orig: 60, 20
+  offset: 0, 0
+  index: -1
+EnemyTurn
+  rotate: false
+  xy: 483, 278
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+PerTurnBlue
+  rotate: false
+  xy: 565, 278
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+PerTurnGreen
+  rotate: false
+  xy: 647, 278
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+PerTurnRed
+  rotate: false
+  xy: 483, 261
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+Poisoned
+  rotate: false
+  xy: 565, 261
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+Stunned
+  rotate: false
+  xy: 647, 261
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+AutomatonRepairCard
+  rotate: false
+  xy: 357, 181
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+BolsterCard
+  rotate: false
+  xy: 409, 181
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+CardBack
+  rotate: false
+  xy: 461, 179
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+CardBack1
+  rotate: false
+  xy: 513, 179
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+CultistCard1
+  rotate: false
+  xy: 565, 179
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+CultistCard2
+  rotate: false
+  xy: 617, 179
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+DescriptionArt
+  rotate: false
+  xy: 669, 179
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+EnemySprite3
+  rotate: false
+  xy: 921, 326
+  size: 69, 22
+  orig: 69, 22
+  offset: 0, 0
+  index: -1
+InspiredCard
+  rotate: false
+  xy: 721, 179
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+Mark
+  rotate: false
+  xy: 773, 204
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+QuickShot
+  rotate: false
+  xy: 825, 204
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+SlimeCard
+  rotate: false
+  xy: 877, 204
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+YourTurn
+  rotate: false
+  xy: 773, 187
+  size: 80, 15
+  orig: 80, 15
+  offset: 0, 0
+  index: -1
+SteadyShot
+  rotate: false
+  xy: 929, 244
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+map2
+  rotate: false
+  xy: 929, 192
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+AutomatonIdle
+  rotate: false
+  xy: 855, 180
+  size: 60, 22
+  orig: 60, 22
+  offset: 0, 0
+  index: -1
+Victory
+  rotate: false
+  xy: 83, 2
+  size: 59, 11
+  orig: 59, 11
+  offset: 0, 0
+  index: -1
+CardsPlayed
+  rotate: false
+  xy: 773, 177
+  size: 60, 8
+  orig: 60, 8
+  offset: 0, 0
+  index: -1
+MenuTopCorner
+  rotate: false
+  xy: 321, 178
+  size: 32, 30
+  orig: 32, 30
+  offset: 0, 0
+  index: -1
+SummonGoblin
+  rotate: false
+  xy: 305, 96
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
 testAttack1
   rotate: false
-  xy: 1, 155
-  size: 50, 75
-  orig: 50, 75
+  xy: 357, 99
+  size: 50, 80
+  orig: 50, 80
   offset: 0, 0
   index: -1
 testAttack2
   rotate: false
-  xy: 1, 78
-  size: 50, 75
-  orig: 50, 75
+  xy: 409, 99
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+testAttack3
+  rotate: false
+  xy: 461, 97
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+testAttack4
+  rotate: false
+  xy: 513, 97
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+testBleed1
+  rotate: false
+  xy: 565, 97
+  size: 50, 80
+  orig: 50, 80
   offset: 0, 0
   index: -1
 testHeal1
   rotate: false
-  xy: 1, 1
-  size: 50, 75
-  orig: 50, 75
+  xy: 617, 97
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+testStun
+  rotate: false
+  xy: 669, 97
+  size: 50, 80
+  orig: 50, 80
+  offset: 0, 0
+  index: -1
+testSprite
+  rotate: false
+  xy: 721, 127
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+RangerIdle
+  rotate: false
+  xy: 773, 153
+  size: 60, 22
+  orig: 60, 22
+  offset: 0, 0
+  index: -1
+EldritchSpider
+  rotate: false
+  xy: 305, 54
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+PlayerSprite2
+  rotate: false
+  xy: 773, 131
+  size: 51, 20
+  orig: 51, 20
+  offset: 0, 0
+  index: -1
+DefeatScreen
+  rotate: false
+  xy: 721, 108
+  size: 51, 17
+  orig: 51, 17
+  offset: 0, 0
+  index: -1
+VictoryScreen
+  rotate: false
+  xy: 774, 112
+  size: 51, 17
+  orig: 51, 17
+  offset: 0, 0
+  index: -1
+Draw
+  rotate: false
+  xy: 721, 91
+  size: 50, 15
+  orig: 50, 15
+  offset: 0, 0
+  index: -1
+Numbers
+  rotate: false
+  xy: 305, 47
+  size: 55, 5
+  orig: 55, 5
+  offset: 0, 0
+  index: -1
+AutomatonSprite
+  rotate: false
+  xy: 318, 23
+  size: 23, 22
+  orig: 23, 22
+  offset: 0, 0
+  index: -1
+AutomatonDead
+  rotate: false
+  xy: 343, 23
+  size: 20, 22
+  orig: 20, 22
+  offset: 0, 0
+  index: -1
+Bleed
+  rotate: false
+  xy: 1005, 493
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+BlockMagic
+  rotate: false
+  xy: 1005, 473
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+BlockMelee
+  rotate: false
+  xy: 1005, 453
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+BlockRanged
+  rotate: false
+  xy: 1005, 433
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+DeadPlayer
+  rotate: false
+  xy: 360, 1
+  size: 31, 20
+  orig: 31, 20
+  offset: 0, 0
+  index: -1
+Health
+  rotate: false
+  xy: 1005, 413
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+Mana
+  rotate: false
+  xy: 1005, 393
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+Marked
+  rotate: false
+  xy: 1005, 373
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+EndTurnButton
+  rotate: false
+  xy: 774, 95
+  size: 50, 15
+  orig: 50, 15
+  offset: 0, 0
+  index: -1
+EndTurnButton2
+  rotate: false
+  xy: 357, 82
+  size: 50, 15
+  orig: 50, 15
+  offset: 0, 0
+  index: -1
+Pass
+  rotate: false
+  xy: 409, 82
+  size: 50, 15
+  orig: 50, 15
+  offset: 0, 0
+  index: -1
+PlayButton
+  rotate: false
+  xy: 461, 80
+  size: 50, 15
+  orig: 50, 15
+  offset: 0, 0
+  index: -1
+TutorialButton
+  rotate: false
+  xy: 513, 80
+  size: 50, 15
+  orig: 50, 15
+  offset: 0, 0
+  index: -1
+Defeat
+  rotate: false
+  xy: 565, 84
+  size: 49, 11
+  orig: 49, 11
+  offset: 0, 0
+  index: -1
+CancelButton
+  rotate: false
+  xy: 616, 80
+  size: 40, 15
+  orig: 40, 15
+  offset: 0, 0
+  index: -1
+EquipButton
+  rotate: false
+  xy: 658, 80
+  size: 40, 15
+  orig: 40, 15
+  offset: 0, 0
+  index: -1
+Cost
+  rotate: false
+  xy: 729, 268
+  size: 25, 25
+  orig: 25, 25
+  offset: 0, 0
+  index: -1
+Poison
+  rotate: false
+  xy: 1005, 353
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+OpenButton
+  rotate: false
+  xy: 347, 65
+  size: 40, 15
+  orig: 40, 15
+  offset: 0, 0
+  index: -1
+RangerSign
+  rotate: false
+  xy: 389, 65
+  size: 40, 15
+  orig: 40, 15
+  offset: 0, 0
+  index: -1
+SelectButton
+  rotate: false
+  xy: 362, 48
+  size: 40, 15
+  orig: 40, 15
+  offset: 0, 0
+  index: -1
+WarriorSign
+  rotate: false
+  xy: 365, 31
+  size: 40, 15
+  orig: 40, 15
+  offset: 0, 0
+  index: -1
+Stamina
+  rotate: false
+  xy: 835, 167
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+BlueBar
+  rotate: false
+  xy: 855, 168
+  size: 40, 10
+  orig: 40, 10
+  offset: 0, 0
+  index: -1
+GreenBar
+  rotate: false
+  xy: 565, 72
+  size: 40, 10
+  orig: 40, 10
+  offset: 0, 0
+  index: -1
+ProgressBarEmpty
+  rotate: false
+  xy: 773, 83
+  size: 40, 10
+  orig: 40, 10
+  offset: 0, 0
+  index: -1
+RedBar
+  rotate: false
+  xy: 855, 156
+  size: 40, 10
+  orig: 40, 10
+  offset: 0, 0
+  index: -1
+Stun
+  rotate: false
+  xy: 835, 147
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+CultistSprite
+  rotate: false
+  xy: 897, 156
+  size: 23, 22
+  orig: 23, 22
+  offset: 0, 0
+  index: -1
+EnemyArcherDead
+  rotate: false
+  xy: 757, 288
+  size: 23, 22
+  orig: 23, 22
+  offset: 0, 0
+  index: -1
+EnemyDead
+  rotate: false
+  xy: 431, 60
+  size: 23, 20
+  orig: 23, 20
+  offset: 0, 0
+  index: -1
+EnemySprite
+  rotate: false
+  xy: 456, 56
+  size: 23, 22
+  orig: 23, 22
+  offset: 0, 0
+  index: -1
+PlayerSprite
+  rotate: false
+  xy: 481, 56
+  size: 23, 22
+  orig: 23, 22
+  offset: 0, 0
+  index: -1
+RangerSprite
+  rotate: false
+  xy: 506, 56
+  size: 23, 22
+  orig: 23, 22
+  offset: 0, 0
+  index: -1
+Antivenom
+  rotate: false
+  xy: 531, 58
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleCornerLD
+  rotate: false
+  xy: 981, 304
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleCornerLU
+  rotate: false
+  xy: 981, 282
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleCornerRD
+  rotate: false
+  xy: 981, 260
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleCornerRU
+  rotate: false
+  xy: 981, 238
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleFloor
+  rotate: false
+  xy: 981, 216
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleFloor2
+  rotate: false
+  xy: 981, 194
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleReverseCornerLD
+  rotate: false
+  xy: 1003, 331
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleReverseCornerLU
+  rotate: false
+  xy: 1003, 309
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleReverseCornerRD
+  rotate: false
+  xy: 1003, 287
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleReverseCornerRU
+  rotate: false
+  xy: 1003, 265
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleWallDown
+  rotate: false
+  xy: 1003, 243
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleWallLeft
+  rotate: false
+  xy: 1003, 221
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleWallRight
+  rotate: false
+  xy: 1003, 199
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CastleWallUp
+  rotate: false
+  xy: 1003, 177
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+ChargedSword
+  rotate: false
+  xy: 981, 172
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+Chest
+  rotate: false
+  xy: 1003, 155
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+ChestOpened
+  rotate: false
+  xy: 855, 134
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CornerLD
+  rotate: false
+  xy: 877, 134
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CornerLU
+  rotate: false
+  xy: 899, 134
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CornerRD
+  rotate: false
+  xy: 393, 9
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+CornerRU
+  rotate: false
+  xy: 407, 43
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+Desert1
+  rotate: false
+  xy: 429, 38
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+DullSword
+  rotate: false
+  xy: 451, 34
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+ReverseCornerLD
+  rotate: false
+  xy: 473, 34
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+ReverseCornerLU
+  rotate: false
+  xy: 495, 34
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+ReverseCornerRD
+  rotate: false
+  xy: 517, 34
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+ReverseCornerRU
+  rotate: false
+  xy: 539, 36
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+ShieldRing
+  rotate: false
+  xy: 561, 50
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+SlimeBoy
+  rotate: false
+  xy: 583, 50
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+SlimeBoyDead
+  rotate: false
+  xy: 561, 28
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+SpeedStone
+  rotate: false
+  xy: 583, 28
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+Wall1
+  rotate: false
+  xy: 539, 14
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+Wall2
+  rotate: false
+  xy: 561, 6
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+Wall3
+  rotate: false
+  xy: 583, 6
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+Wall4
+  rotate: false
+  xy: 922, 170
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+Wall5
+  rotate: false
+  xy: 944, 170
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+WoodenBow
+  rotate: false
+  xy: 922, 148
+  size: 20, 20
+  orig: 20, 20
   offset: 0, 0
   index: -1
