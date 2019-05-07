@@ -3,6 +3,7 @@ package com.battle.player;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.battle.graphics.Animation;
 import com.battle.graphics.ColorSwitchAnimation;
 import com.battle.graphics.FadingAnimation;
 import com.fortyways.dns.DnS;
@@ -11,6 +12,7 @@ import com.fortyways.util.Graphic;
 public class AdditionalAnimationHandler {
 	protected ColorSwitchAnimation onHitAnimation;
 	public ArrayList<FadingAnimation> anims;
+	private Animation fireAnim;
 	private BattleEntity ent;
 	private ArrayList<Graphic> icons;
 	public AdditionalAnimationHandler(BattleEntity ent) {
@@ -18,9 +20,14 @@ public class AdditionalAnimationHandler {
 		onHitAnimation=new ColorSwitchAnimation(true, false);
 		anims=new ArrayList<>();
 		icons=new ArrayList<>();
+		
 		//
 	}
-
+	public void setFireAnim(){
+		fireAnim=new Animation(ent.idleAnim.x,  DnS.HEIGHT/2,
+				26*5, 29*5, DnS.res.getAtlas("pack").findRegion("fireanim"), 
+				20, 26, 29);
+	}
 	public void render(SpriteBatch spriteBatch){
 		if(!ent.isDead())
 		for(Graphic gr:icons){
@@ -29,9 +36,14 @@ public class AdditionalAnimationHandler {
 		for(FadingAnimation fa:anims){
 			fa.render(spriteBatch);
 		}
+		if(ent.isOnFire()){
+			fireAnim.render(spriteBatch);
+		}
 	}
 	public void update(float dt){
-
+		if(ent.isOnFire()){
+				fireAnim.update(dt);
+			}
 		for(FadingAnimation fa:anims){
 			if(fa.started&&!fa.finished){
 				fa.update(dt);
@@ -86,6 +98,26 @@ public class AdditionalAnimationHandler {
 		else{
 			for(Graphic icon:icons){
 				if(icon.image==DnS.res.getAtlas("pack").findRegion("Marked")){
+					icons.remove(icon);
+					break;
+				}
+			}
+		}
+	}
+	public void setOnFireIcon(boolean onfire){
+		if(onfire){
+			if(icons.size()!=0){
+				icons.add(new Graphic(icons.get(icons.size()-1).x+18,
+								ent.getIdleAnim().y+100, DnS.res.getAtlas("pack").findRegion("Fire")));
+			}
+			else{
+				icons.add(new Graphic(ent.getIdleAnim().x-30,
+						ent.getIdleAnim().y+100, DnS.res.getAtlas("pack").findRegion("Fire")));
+			}
+		}
+		else{
+			for(Graphic icon:icons){
+				if(icon.image==DnS.res.getAtlas("pack").findRegion("Fire")){
 					icons.remove(icon);
 					break;
 				}

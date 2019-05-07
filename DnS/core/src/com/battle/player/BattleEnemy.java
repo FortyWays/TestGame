@@ -18,11 +18,9 @@ import com.stage.graphics.InfoPanel;
 public class BattleEnemy extends BattleEntity{
 	private AIDecisionMaking ai;
 	
-	private StatBar hpBar;
-	private StatBar spBar;
-	private StatBar mpBar;
+	
 	public int pos;
-	public InfoPanel panel;
+	//public InfoPanel panel;
 	
 	public BattleEnemy(String name,int pos,String stageName) {
 		
@@ -33,12 +31,13 @@ public class BattleEnemy extends BattleEntity{
 				BattleEntityStorage.getRegens(name)[1],
 				BattleEntityStorage.getRegens(name)[2], 
 				BattleEntityStorage.getDeck(name));
-		setIdleAnim(new Animation(DnS.WIDTH/2+100*pos+30, DnS.HEIGHT/2,
+		setIdleAnim(new Animation(DnS.WIDTH/2+100*pos+90, DnS.HEIGHT/2,
 				SpriteStorage.getFrameProportions(name)[0]*5,
 				SpriteStorage.getFrameProportions(name)[1]*5,
 				SpriteStorage.getIdleAnimationSpriteSheet(name)
 				,20, SpriteStorage.getFrameProportions(name)[0]
 				,SpriteStorage.getFrameProportions(name)[1]));
+		animHandler.setFireAnim();
 		this.pos=pos;
 		this.entityName=name;
 		hpBar=new StatBar(getIdleAnim().x+10, getIdleAnim().y+70, 
@@ -59,9 +58,6 @@ public class BattleEnemy extends BattleEntity{
 		//mpBar.render(spriteBatch);
 		}
 		super.render(spriteBatch);
-		
-		
-		
 	}
 	
 	@Override

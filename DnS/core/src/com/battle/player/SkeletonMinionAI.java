@@ -8,19 +8,18 @@ import com.battle.card.CardEffectAttributes;
 import com.fortyways.state.BattleState;
 import com.fortyways.util.Graphic;
 
-public class GoblinAI extends AIDecisionMaking{
-
+public class SkeletonMinionAI extends AIDecisionMaking {
 	private ArrayList<Card> summonCards;
-	public GoblinAI(BattleState state, BattleEntity ai) {
+	public SkeletonMinionAI(BattleState state, BattleEntity ai) {
 		super(state, ai);
-		
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void MakeDecision() {
 		HashMap<Card, BattleEntity> decision=new HashMap<>();
 		CategorizeCards();
-		if(summonCards.size()>0&&(state.enemies.size()<4||state.hasDeadEnemies())){
+		if(summonCards.size()>0&&(state.minions.size()<3)){
 			for(Card card:summonCards){
 				if(ai.sp>=card.spcost&&ai.mp>=card.mpcost){
 				decision.put(card, null);
@@ -37,15 +36,12 @@ public class GoblinAI extends AIDecisionMaking{
 		}
 		else{
 			ArrayList<Card> gonnaPlay=getCurrentPossibleDamage();
-			int tempspcost=0, tempmpcost=0;
 			for(Card card: gonnaPlay){
-				if(ai.sp>=tempspcost+card.spcost&&ai.mp>=tempmpcost+card.mpcost){
-				decision.put(card, state.player);}
+				if(ai.sp>=card.spcost&&ai.mp>=card.mpcost){
+				decision.put(card, getLowestHealthEnemy());}
 			}
 		}
 		chosenCards=decision;
-		if(chosenCards.size()!=0)
-		ai.panel.updateCardAmount(decision);
 		if(!chosenCards.isEmpty()){
 			it=chosenCards.entrySet().iterator();
 		currentCard=it.next().getKey();
@@ -54,6 +50,20 @@ public class GoblinAI extends AIDecisionMaking{
 				currentCard.cardArt.getRegionHeight()/2,currentCard.cardArt);
 		alpha=1;
 		}
+		
+	}
+
+	private BattleEntity getLowestHealthEnemy() {
+		BattleEntity res=state.player;
+		int min=1000000;
+		for(BattleEntity enemy:state.enemies){
+			if(enemy.hp<min&&!enemy.isDead()){
+				min=enemy.hp;
+				res=enemy;
+			}
+		}
+		
+		return res;
 	}
 
 	@Override
@@ -74,17 +84,17 @@ public class GoblinAI extends AIDecisionMaking{
 				sustainCards.add(card);
 				break;
 			}
-			else if(cea.effectid=="attack1"||
-					cea.effectid=="attackall"){
+			else if(cea.effectid=="attack1"){
 				attackCards.add(card);
 				break;
 			}
-			else if(cea.effectid=="summonenemy"){
+			else if(cea.effectid=="summonminion"){
 				summonCards.add(card);
 				break;
 			}
 			
 		}
+		
 	}
 
 	@Override
