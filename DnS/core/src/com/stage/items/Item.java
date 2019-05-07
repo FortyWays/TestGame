@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.battle.card.Card;
+import com.encounter.EncounterPlayer;
 import com.fortyways.dns.DnS;
 import com.fortyways.util.Graphic;
 import com.fortyways.util.Rectangle;
@@ -20,6 +21,7 @@ public class Item extends Rectangle{
 	private ArrayList<Card> cards=new ArrayList<>();
 	private TextureRegion sprite;
 	public Graphic equipButton; 
+	private TextureRegion itemslot=DnS.res.getAtlas("pack").findRegion("ItemSlot");
 	public ItemPanel panel;
 	private String className="";
 	private String slot="";
@@ -67,10 +69,11 @@ public class Item extends Rectangle{
 		equipButton.render(spriteBatch);
 	}
 	public void render(SpriteBatch spriteBatch){
+		spriteBatch.draw(itemslot, relativeX, relativeY,40,40);
 		spriteBatch.draw(sprite, relativeX, relativeY,40,40);
 	}
-	public void Equip(StagePlayer player){
-		
+
+	public void Equip(EncounterPlayer player){
 		if(!player.items.contains(this)){
 			player.items.add(this);
 		}
@@ -83,11 +86,19 @@ public class Item extends Rectangle{
 		player.equipped.add(this);
 		ItemEffects.ApplyEffect(itemInstructions, player);
 	}
-	public void Unequip(StagePlayer player){
+	public void Unequip(EncounterPlayer player){
 		player.equipped.remove(this);
 		ItemEffects.RemoveEffect(itemInstructions, player);
 	}
-
+	public void setRelativeX(float relativeX) {
+		this.relativeX = relativeX;
+	}
+	public void setRelativeY(float relativeY) {
+		this.relativeY = relativeY;
+	}
+	public float getRelativeY() {
+		return relativeY;
+	}
 	public TextureRegion getSprite() {
 		return sprite;
 	}
@@ -115,4 +126,5 @@ public class Item extends Rectangle{
 	public String getClassName() {
 		return className;
 	}
+	
 }
