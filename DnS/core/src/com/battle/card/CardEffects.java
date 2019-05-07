@@ -6,12 +6,13 @@ import java.util.Random;
 import com.battle.graphics.FadingAnimation;
 import com.battle.player.BattleEnemy;
 import com.battle.player.BattleEntity;
+import com.battle.player.BattleMinion;
 import com.fortyways.state.BattleState;
 
 public class CardEffects {
 	public static void GetEffect(BattleEntity caster,BattleEntity target,CardEffectAttributes[] cea){
 		for(int i=0;i<cea.length;i++){
-		if(cea[i].effectid== "attack1"){AttackOne(cea[i],target);}
+		if(cea[i].effectid== "attack1"){AttackOne(cea[i],target,caster);}
 		//case("attackall"):{AttackAll(cea[i]);}
 		else if(cea[i].effectid=="drawself"){Draw(cea[i],caster);}
 		else if(cea[i].effectid=="gainhp" ){GainHP(cea[i],target);}
@@ -27,9 +28,11 @@ public class CardEffects {
 		else if(cea[i].effectid=="blockmagic" ){target.setMagicBlock(true);}
 		else if(cea[i].effectid=="bleeding" ){Bleeding(cea[i],target);}
 		else if(cea[i].effectid=="poisoned" ){Poisoned(cea[i],target);}
+		else if(cea[i].effectid=="fire" ){Fire(cea[i],target);}
 		else if(cea[i].effectid=="cure"){Cure(cea[i],target);}
 		else if(cea[i].effectid=="marked"){Marked(cea[i], target);}
 		else if(cea[i].effectid=="selfdmg" ){LoseHP(cea[i],caster);}
+		else if(cea[i].effectid=="extraturn"){GainAnExtraTurn(cea[i],caster);}
 		}
 		
 		
@@ -39,11 +42,12 @@ public class CardEffects {
 
 	public static void GetEffect(BattleEntity caster,BattleState state,CardEffectAttributes[] cea){
 		for(int i=0;i<cea.length;i++){
-		if(cea[i].effectid== "attackall"){AttackAll(cea[i],state);}
+		if(cea[i].effectid== "attackall"){AttackAll(cea[i],state,caster);}
 		else if(cea[i].effectid=="summonenemy"){SpawnEnemy(cea[i], state);}
+		else if(cea[i].effectid=="summonminion"){SpawnMinion(cea[i], state);}
 		else if(cea[i].effectid=="reviveenemy"){ReviveEnemy(cea[i], state);}
-		else if(cea[i].effectid=="attack1random"){AttackRandomEnemy(cea[i], state);}
-		else if(cea[i].effectid=="attackplayer"){attack(state.player,cea[i].amount, cea[i].dmgtype);}
+		else if(cea[i].effectid=="attack1random"){AttackRandomEnemy(cea[i], state,caster);}
+		else if(cea[i].effectid=="attackplayer"){attack(state.player,cea[i].amount, cea[i].dmgtype,caster);}
 		else if(cea[i].effectid=="increasedp"){IncreaseDP(caster, cea[i], state);}
 		else if(cea[i].effectid=="selfdmg" ){LoseHP(cea[i],caster);}
 		else if(cea[i].effectid=="summonforeachdp" ){SummonForEachDP(cea[i],state);}
@@ -94,13 +98,18 @@ public class CardEffects {
 		target.addMessageAnimation("cured", "red", 70);
 	}
 	
+	private static void GainAnExtraTurn(CardEffectAttributes cea, BattleEntity target) {
+		//target.
+		target.setExtraTurn(true);
+	}
+	
 	private static void LoseHP(CardEffectAttributes cea, BattleEntity target) {
 		
 		target.addMessageAnimation("-"+cea.amount, "red", 70);
 		target.ChangeHP(-cea.amount);
 	}
 	
-	private static void AttackRandomEnemy(CardEffectAttributes cea,BattleState state){
+	private static void AttackRandomEnemy(CardEffectAttributes cea,BattleState state, BattleEntity caster){
 		int amount=0;
 		for(BattleEntity ent:state.enemies){
 			if(!ent.isDead()){
@@ -116,7 +125,7 @@ public class CardEffects {
 		for(BattleEntity ent:state.enemies){
 			
 			if(curnum==num){
-				attack(ent,cea.amount,cea.dmgtype);
+				attack(ent,cea.amount,cea.dmgtype,caster);
 				
 				break;
 			}
@@ -147,6 +156,27 @@ public class CardEffects {
 			state.enties.set(pos+1, state.enemies.get(pos));
 		}
 	}
+	private static void SpawnMinion(CardEffectAttributes cea,BattleState state){
+		if(state.minions.size()<3){
+		state.minions.add(new BattleMinion(cea.entityName, state.minions.size(),state.stageName));
+		state.minions.get(state.minions.size()-1).FillEmptyHand(4);
+		//state.enemies.get(state.enemies.size()-1).effects.setJustSpawned(true);
+		state.minions.get(state.minions.size()-1).setUpAi(state);
+		state.enties.add(state.minions.get(state.minions.size()-1));}
+		else{
+			int pos = 0;
+			for(BattleMinion minion:state.minions){
+				if(minion.isDead()){
+					pos=minion.pos;
+					break;
+				}
+			}
+			state.minions.set(pos, new BattleMinion(cea.entityName, pos,state.stageName));
+			state.minions.get(pos).FillEmptyHand(4);
+			state.minions.get(pos).setUpAi(state);
+			state.enties.set(state.enties.size(), state.minions.get(pos));
+		}
+	}
 	private static void Stun(CardEffectAttributes cardEffectAttributes, BattleEntity target) {
 		target.addMessageAnimation("stunned", "yellow", 90);
 		target.setStunned(true);
@@ -157,16 +187,16 @@ public class CardEffects {
 		target.DrawRandomCards(cea.amount,true);
 		
 	}
-	private static void AttackOne(CardEffectAttributes cea,BattleEntity target)
+	private static void AttackOne(CardEffectAttributes cea,BattleEntity target, BattleEntity caster)
 	{
-		attack(target,cea.amount,cea.dmgtype);
+		attack(target,cea.amount,cea.dmgtype,caster);
 	}
 
-	private static void AttackAll(CardEffectAttributes cea,BattleState state)
+	private static void AttackAll(CardEffectAttributes cea,BattleState state, BattleEntity caster)
 	{
 		for(BattleEntity ent:state.enemies){
 			if(!ent.isDead()){
-				attack(ent,cea.amount,cea.dmgtype);}
+				attack(ent,cea.amount,cea.dmgtype,caster);}
 		}
 	}
 	private static void GainHP(CardEffectAttributes cea,BattleEntity target)
@@ -208,6 +238,14 @@ public class CardEffects {
 		target.effects.setBleedingTurns(cea.turns);
 		}
 	}
+	private static void Fire(CardEffectAttributes cea,BattleEntity target){
+		if(!target.getImmuneToFire()){
+		target.addMessageAnimation("on fire", "red", 70);
+		target.setOnFire(true);
+		target.effects.setFireDmg(target.effects.getFireDmg()+cea.amount);
+		target.effects.setFireTurns(cea.turns);
+		}
+	}
 	private static void Marked(CardEffectAttributes cea,BattleEntity target){
 		//target.addMessageAnimation("bleeding", "red", 70);
 		target.setMarked(true);
@@ -221,7 +259,7 @@ public class CardEffects {
 		target.effects.setPoisonedTurns(cea.turns);
 		}
 	}
-	private static void attack(BattleEntity target,int amount,String dmgtype){
+	private static void attack(BattleEntity target,int amount,String dmgtype, BattleEntity caster){
 		
 		
 		if(!target.isDead()){
@@ -231,6 +269,13 @@ public class CardEffects {
 				
 				if(target.effects.isMarked()&&dmgtype=="ranged"){
 					amount*=2;
+				}
+				//System.out.println(caster.effects);
+				if(caster.effects.isRangedFire()&&dmgtype=="ranged"){
+					
+					CardEffectAttributes cea=new CardEffectAttributes("fire", 2);
+					cea.turns=2;
+					Fire(cea,target);
 				}
 			target.addMessageAnimation("-"+amount, "red", 70);
 			target.PlayOnHitAnimation();
