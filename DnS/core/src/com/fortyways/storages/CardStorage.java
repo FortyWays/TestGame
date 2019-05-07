@@ -166,6 +166,24 @@ public class CardStorage {
 		Cards.put("SummonGoblin", 
 				new Card(30, 0, "Summon",DnS.res.getAtlas("pack").findRegion("SummonGoblin"),temp));
 		Cards.get("SummonGoblin").description="Summon random\n goblin";
+		
+		temp =  new CardEffectAttributes[1];
+		temp[0]=new CardEffectAttributes("summonenemy",1);
+		temp[0].needsTarget="all";
+		temp[0].entityName="slime";
+		Cards.put("SummonSlime", 
+				new Card(10, 0, "SummonSlime",DnS.res.getAtlas("pack").findRegion("SlimeSplitCard2"),temp));
+		Cards.get("SummonSlime").description="Summon another\n slime";
+		
+		temp =  new CardEffectAttributes[1];
+		temp[0]=new CardEffectAttributes("summonenemy",1);
+		temp[0].needsTarget="all";
+		temp[0].entityName="babyslime";
+		Cards.put("SummonBabySlime", 
+				new Card(5, 0, "SummonBabySlime",DnS.res.getAtlas("pack").findRegion("SlimeSplitCard"),temp));
+		Cards.get("SummonBabySlime").description="Summon smaller\n slime";
+		
+		
 		temp =  new CardEffectAttributes[3];
 		temp[2]=new CardEffectAttributes("attackplayer",5);
 		temp[2].setDmgtype("melee");
@@ -205,6 +223,107 @@ public class CardStorage {
 		Cards.get("EldritchSlime").description="For each Dark\n"
 				+ "Presence level\nsummon a Slime";
 		Cards.get("EldritchSlime").requiredDP=2;
+		
+		temp =  new CardEffectAttributes[1];
+		temp[0]=new CardEffectAttributes("extraturn",1);
+		
+		Cards.put("Stop Time", 
+				new Card(0, 30, "Stop Time",DnS.res.getAtlas("pack").findRegion("TimeStop"),temp));
+		Cards.get("Stop Time").description="Gain an extra turn!";
+		
+		temp =  new CardEffectAttributes[1];
+		temp[0]=new CardEffectAttributes("summonminion",1);
+		temp[0].needsTarget="all";
+		temp[0].entityName="skeleton-minion";
+		Cards.put("SummonSkeletonMinion", 
+				new Card(0, 20, "SummonSkeletonMinion",DnS.res.getAtlas("pack").findRegion("SkeletonSummon"),temp));
+		Cards.get("SummonSkeletonMinion").description="Summon friendly\n skeleton";
+		
+		temp =  new CardEffectAttributes[1];
+		temp[0]=new CardEffectAttributes("attack1",5);
+		temp[0].setDmgtype("ranged");
+		Cards.put("Bone Throw", 
+				new Card(5, 0, "Bone Throw",DnS.res.getAtlas("pack").findRegion("BoneThrow"),temp));
+		Cards.get("Bone Throw").description="Deal 5 dmg ";
+		
+		temp =  new CardEffectAttributes[2];
+		temp[0]=new CardEffectAttributes("attack1",5);
+		temp[0].setDmgtype("melee");
+		temp[0].needsTarget="one";
+		temp[1]=new CardEffectAttributes("putbackindeck", 1);
+		temp[1].card=new Card(5, 0, "BoneSmack", DnS.res.getAtlas("pack").findRegion("BoneSmack"),temp);
+		temp[1].card.description="Deal 5 damage.\nPut this back\nin your deck.";
+		temp[1].card.cardInstructions=temp;
+		Cards.put("BoneSmack", 
+				new Card(5, 0, "BoneSmack",DnS.res.getAtlas("pack").findRegion("BoneSmack"),temp));
+		Cards.get("BoneSmack").description="Deal 5 damage.\nPut this back\nin your deck.";
+		
+		temp =  new CardEffectAttributes[1];
+		temp[0]=new CardEffectAttributes("gainhp",5);
+		Cards.put("TotemHeal", 
+				new Card(0, 5, "TotemHeal",DnS.res.getAtlas("pack").findRegion("SummonHealTotem"),temp));
+		Cards.get("TotemHeal").description="Heal ally for 5 ";
+		
+		temp =  new CardEffectAttributes[1];
+		temp[0]=new CardEffectAttributes("summonminion",1);
+		temp[0].needsTarget="all";
+		temp[0].entityName="healtotem";
+		Cards.put("SummonHealTotem", 
+				new Card(0, 10, "SummonHealTotem",DnS.res.getAtlas("pack").findRegion("SummonHealTotem"),temp));
+		Cards.get("SummonHealTotem").description="Summon a heal\n totem";
+		
+		temp =  new CardEffectAttributes[2];
+		temp[0]=new CardEffectAttributes("attack1",10);
+		temp[0].setDmgtype("melee");
+		temp[0].needsTarget="one";
+		temp[1]=new CardEffectAttributes("putbackindeck", 1);
+		temp[1].card=new Card(10, 0, "TotemMaceAttack", DnS.res.getAtlas("pack").findRegion("TotemMaceAttackCard"),temp);
+		temp[1].card.description="Deal 10 damage.\nPut this back\nin your deck.";
+		temp[1].card.cardInstructions=temp;
+		Cards.put("TotemMaceAttack", 
+				new Card(0, 0, "TotemMaceAttack",DnS.res.getAtlas("pack").findRegion("TotemMaceAttackCard"),temp));
+		Cards.get("TotemMaceAttack").description="Deal 5 damage.\nPut this back\nin your deck.";
+		
+		temp =  new CardEffectAttributes[3];
+		temp[0]=new CardEffectAttributes("attack1",5);
+		temp[0].setDmgtype("melee");
+		temp[0].needsTarget="one";
+		temp[1]=new CardEffectAttributes("fire", 2);
+		temp[1].turns=2;
+		temp[2]=new CardEffectAttributes("putbackindeck", 1);
+		temp[2].card=new Card(10, 0, "TorchAttack", DnS.res.getAtlas("pack").findRegion("TorchAttackCard"),temp);
+		temp[2].card.description="Deal 5 damage.\nPut this back\nin your deck. Fire 2 dmg\for 2 turns";
+		temp[2].card.cardInstructions=temp;
+		Cards.put("TorchAttack", 
+				new Card(0, 0, "TotemMaceAttack",DnS.res.getAtlas("pack").findRegion("TorchAttackCard"),temp));
+		Cards.get("TorchAttack").description="Deal 5 damage.\nPut this back\nin your deck. Fire 2 dmg\for 2 turns";
+		
+		temp =  new CardEffectAttributes[3];
+		temp[0]=new CardEffectAttributes("attackall",5);
+		temp[0].setDmgtype("melee");
+		temp[0].needsTarget="all";
+		temp[1]=new CardEffectAttributes("attackall",5);
+		temp[1].setDmgtype("ranged");
+		temp[1].needsTarget="all";
+		temp[2]=new CardEffectAttributes("attackall",5);
+		temp[2].setDmgtype("magic");
+		temp[2].needsTarget="all";
+		Cards.put("PurityAttack", 
+				new Card(0, 5, "PurityAttack",DnS.res.getAtlas("pack").findRegion("SkillCard"),temp));
+		Cards.get("PurityAttack").description="Deal 5 damage \nof each type\to all. ";
+		
+		temp =  new CardEffectAttributes[4];
+		temp[0]=new CardEffectAttributes("blockmelee",0);
+		temp[1]=new CardEffectAttributes("blockranged",0);
+		temp[2]=new CardEffectAttributes("blockmagic",0);
+		temp[3]=new CardEffectAttributes("gainhp",5);
+	
+		Cards.put("PurityDefense", 
+				new Card(0, 5, "PurityDefense",DnS.res.getAtlas("pack").findRegion("SkillCard"),temp));
+		Cards.get("PurityDefense").description="Restore 5 health. \nBlock of each type ";
+		
+		
+		
 		
 	}
 	public static Card getCard(String name){

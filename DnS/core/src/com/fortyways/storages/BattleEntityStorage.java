@@ -9,6 +9,8 @@ import com.battle.player.BattleEnemy;
 import com.battle.player.BattleEntity;
 import com.battle.player.CultistAI;
 import com.battle.player.GoblinAI;
+import com.battle.player.HealTotemMinionAI;
+import com.battle.player.SkeletonMinionAI;
 import com.battle.player.StandardAI;
 import com.fortyways.dns.DnS;
 import com.fortyways.state.BattleState;
@@ -42,7 +44,7 @@ public class BattleEntityStorage {
 		tempdeck.add(CardStorage.getCard("TestHeal1"));
 		tempdeck.add(CardStorage.getCard("Poison1"));
 		tempdeck.add(CardStorage.getCard("Poison1"));
-		tempdeck.add(CardStorage.getCard("SummonGoblin"));
+		//tempdeck.add(CardStorage.getCard("SummonGoblin"));
 		decks.put("goblin-archer", tempdeck);
 		tempdeck=new ArrayList<>();
 		tempdeck.add(CardStorage.getCard("SacrificialStab"));
@@ -71,6 +73,46 @@ public class BattleEntityStorage {
 		tempdeck.add(CardStorage.getCard("Repair"));
 		tempdeck.add(CardStorage.getCard("AutomatonAttack2"));
 		decks.put("automaton", tempdeck);
+		tempdeck=new ArrayList<>();
+		tempdeck.add(CardStorage.getCard("BoneSmack"));
+		tempdeck.add(CardStorage.getCard("BoneSmack"));
+		tempdeck.add(CardStorage.getCard("Bone Throw"));
+		tempdeck.add(CardStorage.getCard("Bone Throw"));
+		tempdeck.add(CardStorage.getCard("Bone Throw"));
+		decks.put("skeleton-minion", tempdeck);
+		tempdeck=new ArrayList<>();
+		tempdeck.add(CardStorage.getCard("BoneSmack"));
+		tempdeck.add(CardStorage.getCard("BoneSmack"));
+		tempdeck.add(CardStorage.getCard("BoneSmack"));
+		tempdeck.add(CardStorage.getCard("Bone Throw"));
+		tempdeck.add(CardStorage.getCard("Bone Throw"));
+		tempdeck.add(CardStorage.getCard("Bone Throw"));
+		decks.put("skeleton", tempdeck);
+		tempdeck=new ArrayList<>();
+		tempdeck.add(CardStorage.getCard("TotemHeal"));
+		tempdeck.add(CardStorage.getCard("TotemHeal"));
+		tempdeck.add(CardStorage.getCard("TotemHeal"));
+		tempdeck.add(CardStorage.getCard("TotemHeal"));
+		decks.put("healtotem", tempdeck);
+		tempdeck=new ArrayList<>();
+		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		tempdeck.add(CardStorage.getCard("SummonSlime"));
+		tempdeck.add(CardStorage.getCard("SummonBabySlime"));
+		tempdeck.add(CardStorage.getCard("SummonBabySlime"));
+		//tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		//tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		//tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		decks.put("slime", tempdeck);
+		tempdeck=new ArrayList<>();
+		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
+		decks.put("babyslime", tempdeck);
+		
 		stats=new HashMap<>();
 		int[] tempstats=new int[3];
 		tempstats[0]=50;
@@ -83,7 +125,7 @@ public class BattleEntityStorage {
 		tempstats[2]=30;
 		stats.put("goblin-archer", tempstats);
 		tempstats=new int[3];
-		tempstats[0]=80;
+		tempstats[0]=40;
 		tempstats[1]=50;
 		tempstats[2]=50;
 		stats.put("cultist", tempstats);
@@ -97,6 +139,32 @@ public class BattleEntityStorage {
 		tempstats[1]=40;
 		tempstats[2]=40;
 		stats.put("automaton", tempstats);
+		tempstats=new int[3];
+		tempstats[0]=10;
+		tempstats[1]=10;
+		tempstats[2]=5;
+		stats.put("skeleton-minion", tempstats);
+		tempstats=new int[3];
+		tempstats[0]=20;
+		tempstats[1]=20;
+		tempstats[2]=5;
+		stats.put("skeleton", tempstats);
+		tempstats=new int[3];
+		tempstats[0]=20;
+		tempstats[1]=20;
+		tempstats[2]=20;
+		stats.put("healtotem", tempstats);
+		tempstats=new int[3];
+		tempstats[0]=20;
+		tempstats[1]=20;
+		tempstats[2]=20;
+		stats.put("slime", tempstats);
+		tempstats=new int[3];
+		tempstats[0]=10;
+		tempstats[1]=10;
+		tempstats[2]=10;
+		stats.put("babyslime", tempstats);
+		
 		regens=new HashMap<>();
 		int[] tempregens=new int[3];
 		tempregens[0]=0;
@@ -123,7 +191,31 @@ public class BattleEntityStorage {
 		tempregens[1]=2;
 		tempregens[2]=0;
 		regens.put("slimeboy", tempregens);
-		
+		tempregens=new int[3];
+		tempregens[0]=0;
+		tempregens[1]=5;
+		tempregens[2]=0;
+		regens.put("skeleton-minion", tempregens);
+		tempregens=new int[3];
+		tempregens[0]=0;
+		tempregens[1]=5;
+		tempregens[2]=0;
+		regens.put("skeleton", tempregens);
+		tempregens=new int[3];
+		tempregens[0]=0;
+		tempregens[1]=5;
+		tempregens[2]=5;
+		regens.put("healtotem", tempregens);
+		tempregens=new int[3];
+		tempregens[0]=1;
+		tempregens[1]=5;
+		tempregens[2]=5;
+		regens.put("slime", tempregens);
+		tempregens=new int[3];
+		tempregens[0]=1;
+		tempregens[1]=5;
+		tempregens[2]=5;
+		regens.put("babyslime", tempregens);
 	}
 	public static ArrayList<Card> getDeck(String name){
 		if(decks.containsKey(name)){
@@ -151,6 +243,9 @@ public class BattleEntityStorage {
 		if(ent.entityName=="slimeboy"){
 			ent.setImmuneToPoison(true);
 		}
+		else if(ent.entityName=="skeleton-minion"||ent.entityName=="skeleton"){
+			ent.setImmuneToBleed(true);
+		}
 		else if(ent.entityName=="automaton"){
 			ent.setImmuneToPoison(true);
 			ent.setImmuneToBleed(true);
@@ -170,7 +265,22 @@ public class BattleEntityStorage {
 		else if(ent.entityName=="slimeboy"){
 			return new StandardAI(state, ent);
 		}
+		else if(ent.entityName=="skeleton"){
+			return new StandardAI(state, ent);
+		}
 		else if(ent.entityName=="automaton"){
+			return new StandardAI(state, ent);
+		}
+		if(ent.entityName=="skeleton-minion"){
+			return new SkeletonMinionAI(state, ent);
+		}
+		if(ent.entityName=="healtotem"){
+			return new HealTotemMinionAI(state, ent);
+		}
+		if(ent.entityName=="slime"){
+			return new GoblinAI(state, ent);
+		}
+		if(ent.entityName=="babyslime"){
 			return new StandardAI(state, ent);
 		}
 		return null;

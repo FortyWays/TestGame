@@ -37,6 +37,24 @@ public class SpriteStorage {
 		temp=new int[2];
 		temp[0]=20;temp[1]=22;	
 		frameWidthHeights.put("automaton", temp);
+		temp=new int[2];
+		temp[0]=20;temp[1]=20;	
+		frameWidthHeights.put("skeleton-minion", temp);
+		temp=new int[2];
+		temp[0]=20;temp[1]=20;	
+		frameWidthHeights.put("skeleton", temp);
+		temp=new int[2];
+		temp[0]=20;temp[1]=22;	
+		frameWidthHeights.put("healtotem", temp);
+		temp=new int[2];
+		temp[0]=23;temp[1]=22;	
+		frameWidthHeights.put("slime", temp);
+		temp=new int[2];
+		temp[0]=23;temp[1]=22;	
+		frameWidthHeights.put("babyslime", temp);
+		temp=new int[2];
+		temp[0]=27;temp[1]=28;	
+		frameWidthHeights.put("eldritchspider", temp);
 		idleAnimation=new HashMap<>();
 		idleAnimation.put("goblin-berserk", DnS.res.getAtlas("pack").findRegion("EnemySprite2"));
 		idleAnimation.put("player-warrior", DnS.res.getAtlas("pack").findRegion("PlayerSprite2"));
@@ -45,6 +63,12 @@ public class SpriteStorage {
 		idleAnimation.put("cultist", DnS.res.getAtlas("pack").findRegion("CultistIdle"));
 		idleAnimation.put("slimeboy", DnS.res.getAtlas("pack").findRegion("SlimeBoyIdle"));
 		idleAnimation.put("automaton", DnS.res.getAtlas("pack").findRegion("AutomatonIdle"));
+		idleAnimation.put("skeleton-minion", DnS.res.getAtlas("pack").findRegion("SkeletonIdle"));
+		idleAnimation.put("skeleton", DnS.res.getAtlas("pack").findRegion("SkeletonIdle2"));
+		idleAnimation.put("healtotem", DnS.res.getAtlas("pack").findRegion("TotemIdle"));
+		idleAnimation.put("slime", DnS.res.getAtlas("pack").findRegion("SlimeSprite"));
+		idleAnimation.put("babyslime", DnS.res.getAtlas("pack").findRegion("BabySlimeSprite"));
+		idleAnimation.put("eldritchspider", DnS.res.getAtlas("pack").findRegion("EldritchSpiderIdle"));
 		deathAnimation=new HashMap<>();
 		deathAnimation.put("player-warrior", DnS.res.getAtlas("pack").findRegion("DeathAnimation"));
 		
@@ -57,6 +81,12 @@ public class SpriteStorage {
 		deadAnimation.put("goblin-archer", DnS.res.getAtlas("pack").findRegion("EnemyArcherDead"));
 		deadAnimation.put("slimeboy", DnS.res.getAtlas("pack").findRegion("SlimeBoyDead"));
 		deadAnimation.put("automaton", DnS.res.getAtlas("pack").findRegion("AutomatonDead"));
+		deadAnimation.put("healtotem", DnS.res.getAtlas("pack").findRegion("TotemDead"));
+		deadAnimation.put("skeleton-minion", DnS.res.getAtlas("pack").findRegion("SkeletonDead"));
+		deadAnimation.put("skeleton", DnS.res.getAtlas("pack").findRegion("SkeletonDead2"));
+		deadAnimation.put("eldritchspider", DnS.res.getAtlas("pack").findRegion("EldritchSpiderDead"));
+		deadAnimation.put("slime", DnS.res.getAtlas("pack").findRegion("DeadSlimeSprite"));
+		deadAnimation.put("babyslime", DnS.res.getAtlas("pack").findRegion("DeadSlimeSprite"));
 	}
 	public static int[] getFrameProportions(String name){
 		if(frameWidthHeights.containsKey(name)){
