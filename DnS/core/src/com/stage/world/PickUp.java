@@ -59,4 +59,7 @@ public class PickUp {
 	public boolean Touched(float x,float y){
 		return position.Touched(x, y);
 	}
+	public String getType() {
+		return type;
+	}
 }

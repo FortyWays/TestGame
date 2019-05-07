@@ -16,6 +16,7 @@ import com.stage.player.StagePlayer;
 public class World {
 
 	public ArrayList<Tile> tiles;
+	public ArrayList<Tile> backtiles;
 	public ArrayList<Tile> impassableTiles;
 	//public Color backColor= new Color(198, 152, 73,1);
 	public int size=20;
@@ -34,11 +35,13 @@ public class World {
 	}
 	public World(String name) {
 		tiles=new ArrayList<>();
+		backtiles=new ArrayList<>();
 		
 		
 	}
-	public void setTiles(ArrayList<Tile> tiles,ArrayList<Tile> impassableTiles){
+	public void setTiles(ArrayList<Tile> tiles,ArrayList<Tile> backtiles, ArrayList<Tile> impassableTiles){
 		this.tiles=tiles;
+		this.backtiles=backtiles;
 		this.impassableTiles=impassableTiles;
 		
 	}
@@ -100,6 +103,12 @@ public class World {
 		}
 	
 		//spriteBatch.setColor(backColor);
+	}
+	public void renderBack(SpriteBatch spriteBatch){
+		//Gdx.gl.glClearColor(198f/255f, 152f/255f, 73f/255f, 1);
+		for(Tile t:backtiles){
+			t.render(spriteBatch);
+		}
 	}
 	public void renderEnemies(SpriteBatch spriteBatch){
 		for(StageEnemy enemy:enemies){
@@ -191,9 +200,9 @@ public class World {
 			setPlayerCoords(player,player.getWorldX()+player.speed,player.getWorldY()-player.speed);
 		}
 		for(Tile t:tiles){
-			if(t.Touched(player.getWorldX(), player.getWorldY())){
-			//	System.out.println(t.x+" "+t.y);
-			}
+			t.getNewRelative(player);
+		}
+		for(Tile t:backtiles){
 			t.getNewRelative(player);
 		}
 		for(Item item:items){

@@ -14,10 +14,10 @@ import com.fortyways.storages.StageStorage;
 import com.stage.player.StageEnemy;
 
 public class WorldBuilder {
-
+	static int tileSize=40;
 	public static World buildWorld(String name){
 		
-		int tileSize=40;
+		
 		World world=new World();
 		if(name=="castle"){
 		world.size=50;
@@ -26,6 +26,7 @@ public class WorldBuilder {
 		Pixmap pixmap=map.getTextureData().consumePixmap();
 
 		ArrayList<Tile> tiles=new ArrayList<>();
+		ArrayList<Tile> backtiles=new ArrayList<>();
 		ArrayList<Tile> impassableTiles= new ArrayList<>();
 
 		for(int i=0;i<pixmap.getWidth();i++){
@@ -37,22 +38,33 @@ public class WorldBuilder {
 				}
 				else if(791625727==(pixmap.
 						getPixel( i, j))){
-					tiles.add(new Tile(0+i*tileSize, 0+j*tileSize, getWallTexture(name,i,j), true));
-					impassableTiles.add(tiles.get(tiles.size()-1));
+					//tiles.add(new Tile(0+i*tileSize, 0+j*tileSize, getWallTexture(name,i,j), true));
+					//getTile(name,i,j);
+
+					getWallTexture(impassableTiles,tiles,backtiles,name,i,j);
+					//impassableTiles.add(tiles.get(tiles.size()-1));
 				}		
 			}
 		}
 
 		if(getTile(tiles,520, 840)!=null)
 		world.enemies.add(new StageEnemy(getTile(tiles,520, 840),"automaton",name));
+		if(getTile(tiles,705, 840)!=null)
+		world.enemies.add(new StageEnemy(getTile(tiles,705, 840),"cultist",name));
+			
 		if(getTile(tiles,590, 840)!=null)
 		world.pickups.add(new PickUp("hp",getTile(tiles,590, 840)));
+		if(getTile(tiles,640, 840)!=null)
+		world.pickups.add(new PickUp("sp",getTile(tiles,640, 840)));
+		if(getTile(tiles,665, 840)!=null)
+		world.pickups.add(new PickUp("mp",getTile(tiles,665, 840)));
+				
 		if(getTile(tiles, 400, 910)!=null)
 		world.chests.add(new Chest(getTile(tiles,  410, 910)));
-		//world.items.add(ItemStorage.getItem("Charged Sword"));
+		//world.items.add(ItemStorage.getItem("Spellbound Armor"));
 		//world.items.get(0).setUpPanel();
 		//world.items.get(0).setWorldCoords(450, 870);
-		world.setTiles(tiles, impassableTiles);
+		world.setTiles(tiles,backtiles, impassableTiles);
 		return world;
 		
 		}
@@ -63,6 +75,7 @@ public class WorldBuilder {
 		Pixmap pixmap=map.getTextureData().consumePixmap();
 	
 		ArrayList<Tile> tiles=new ArrayList<>();
+		ArrayList<Tile> backtiles=new ArrayList<>();
 		ArrayList<Tile> impassableTiles= new ArrayList<>();
 		
 		for(int i=0;i<pixmap.getWidth();i++){
@@ -73,14 +86,16 @@ public class WorldBuilder {
 				}
 				else if(-9830145==(pixmap.
 						getPixel( i, j))){
-					tiles.add(new Tile(0+i*tileSize, 0+j*tileSize, getWallTexture(name,i,j), true));
+					//tiles.add(new Tile(0+i*tileSize, 0+j*tileSize, getWallTexture(name,i,j), true));
+					//getTile(name,i,j);
+					 getWallTexture(impassableTiles,tiles,backtiles,name,i,j);
 					impassableTiles.add(tiles.get(tiles.size()-1));
 				}
 				
 			}
 		}
-		if(getTile(tiles,300, 900)!=null)
-		world.enemies.add(new StageEnemy(getTile(tiles,300, 900),"goblin-berserk",name));
+		if(getTile(tiles,600, 990)!=null)
+		world.enemies.add(new StageEnemy(getTile(tiles,600, 990),"goblin-berserk",name));
 		if(getTile(tiles,700, 990)!=null)
 		world.enemies.add(new StageEnemy(getTile(tiles,700, 990),"cultist",name));
 		world.items.add(ItemStorage.getItem("Speed Stone"));
@@ -89,14 +104,18 @@ public class WorldBuilder {
 		world.items.add(ItemStorage.getItem("Antivenom"));
 		world.items.get(1).setUpPanel();
 		world.items.get(1).setWorldCoords(1000, 1200);
-		world.setTiles(tiles, impassableTiles);
+		world.setTiles(tiles,backtiles, impassableTiles);
 		return world;
 		}
 		
 		return null;
 	}
 	
-	private static TextureRegion getWallTexture(String name,int i,int j){
+
+
+	private static void getWallTexture(ArrayList<Tile> impassableTiles, ArrayList<Tile> tiles,
+			ArrayList<Tile> backtiles,
+			String name,int i,int j){
 		
 		HashMap<String,TextureRegion> stageSprites=StageStorage.getStageSprites(name);
 		int floor=0;
@@ -118,73 +137,99 @@ public class WorldBuilder {
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i+1, j)
 				&& pixmap.getPixel(i, j+1)==floor
 				){
-			
-			return stageSprites.get("WallDown");
+			backtiles.add(new Tile(0+i*tileSize, 0+j*tileSize, stageSprites.get("WallDown"), true));
+			impassableTiles.add(backtiles.get(backtiles.size()-1));
+			//return stageSprites.get("WallDown");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i-1, j)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j+1)
 				&& pixmap.getPixel(i, j-1)!=floor
 				){
-			return stageSprites.get("CornerRD");
+			tiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("CornerRD"), true));
+			impassableTiles.add(tiles.get(tiles.size()-1));
+			//return stageSprites.get("CornerRD");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i+1, j)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j+1)
 				&& pixmap.getPixel(i, j-1)!=floor
 				){
-			return stageSprites.get("CornerLD");
+
+			tiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("CornerLD"), true));
+			impassableTiles.add(tiles.get(tiles.size()-1));
+			//return stageSprites.get("CornerLD");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i-1, j)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j-1)
 				&& pixmap.getPixel(i+1, j)!=floor
 				){
-			return stageSprites.get("CornerRU");
+
+			backtiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("CornerRU"), true));
+			impassableTiles.add(backtiles.get(backtiles.size()-1));
+			//return stageSprites.get("CornerRU");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i+1, j)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j-1)
 				&& pixmap.getPixel(i-1, j)!=floor
 				){
-			return stageSprites.get("CornerLU");
+			backtiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("CornerLU"), true));
+			impassableTiles.add(backtiles.get(backtiles.size()-1));
+			//return stageSprites.get("CornerLU");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i+1, j)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j+1)
 				&& pixmap.getPixel(i-1, j)==floor
 				){
-			return stageSprites.get("RCornerLU");
+			tiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("RCornerLU"), true));
+			impassableTiles.add(tiles.get(tiles.size()-1));
+			//return stageSprites.get("RCornerLU");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i-1, j)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j+1)
 				&& pixmap.getPixel(i, j-1)==floor
 				){
-			return stageSprites.get("RCornerRU");
+
+			tiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("RCornerRU"), true));
+			impassableTiles.add(tiles.get(tiles.size()-1));
+			//return stageSprites.get("RCornerRU");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i+1, j)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j-1)
 				&& pixmap.getPixel(i, j+1)==floor
 				){
-			return stageSprites.get("RCornerLD");
+			backtiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("RCornerLD"), true));
+			impassableTiles.add(backtiles.get(backtiles.size()-1));
+			//return stageSprites.get("RCornerLD");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i-1, j)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j-1)
 				&& pixmap.getPixel(i, j+1)==floor
 				){
-			return stageSprites.get("RCornerRD");
+			backtiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("RCornerRD"), true));
+			impassableTiles.add(backtiles.get(backtiles.size()-1));
+			//return stageSprites.get("RCornerRD");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i-1, j)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i+1, j)
 				&& pixmap.getPixel(i, j-1)==floor){
-			return stageSprites.get("WallUp");
+			tiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("WallUp"), true));
+			impassableTiles.add(tiles.get(tiles.size()-1));
+			//return stageSprites.get("WallUp");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i, j+1)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j-1)
 				&& pixmap.getPixel(i+1, j)==floor){
-			return stageSprites.get("WallLeft");
+			backtiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("WallLeft"), true));
+			impassableTiles.add(backtiles.get(backtiles.size()-1));
+			//return stageSprites.get("WallLeft");
 		}
 		else if(pixmap.getPixel(i, j)==pixmap.getPixel(i, j+1)
 				&& pixmap.getPixel(i, j)==pixmap.getPixel(i, j-1)
 				&& pixmap.getPixel(i-1, j)==floor){
-			return stageSprites.get("WallRight");
+			backtiles.add(new Tile(0+i*tileSize, 0+j*tileSize,stageSprites.get("WallRight"), true));
+			impassableTiles.add(backtiles.get(backtiles.size()-1));
+			//return stageSprites.get("WallRight");
 		}
-		else return DnS.res.getAtlas("pack").findRegion("Wall1");
+		else{} //return DnS.res.getAtlas("pack").findRegion("Wall1");
 		
 		//return null;
 		

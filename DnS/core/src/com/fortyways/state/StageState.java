@@ -45,6 +45,9 @@ public class StageState extends State{
 		for(Tile t:world.tiles){
 			t.getNewRelative(player);
 		}
+		for(Tile t:world.backtiles){
+			t.getNewRelative(player);
+		}
 		for(Item item:world.items){
 			item.getNewRelative(player);
 		}
@@ -70,7 +73,9 @@ public class StageState extends State{
 		for(Tile t:world.tiles){
 			t.getNewRelative(player);
 		}
-		
+		for(Tile t:world.backtiles){
+			t.getNewRelative(player);
+		}
 		for(Item item:world.items){
 			item.getNewRelative(player);
 		}
@@ -85,6 +90,9 @@ public class StageState extends State{
 		player=new StagePlayer(playerName,stageName);
 
 		for(Tile t:world.tiles){
+			t.getNewRelative(player);
+		}
+		for(Tile t:world.backtiles){
 			t.getNewRelative(player);
 		}
 		for(Item item:world.items){
@@ -131,8 +139,19 @@ public class StageState extends State{
 				}
 			}
 			else if(world.clippingPickup(player)){
+				if((world.selectedPickUp.getType()=="hp"
+						&&player.getHp()!=player.getMaxhp())
+						||
+						(world.selectedPickUp.getType()=="sp"
+						&&player.getSp()!=player.getMaxsp())
+						||
+						(world.selectedPickUp.getType()=="mp"
+						&&player.getMp()!=player.getMaxmp())
+						){
 				world.selectedPickUp.use(player);
 				world.pickups.remove(world.selectedPickUp);
+				}
+				world.movePlayer(player,mouse);
 			}
 			else
 			world.movePlayer(player,mouse);	
@@ -158,6 +177,7 @@ public class StageState extends State{
 	
 		world.renderEnemies(sb);
 		player.render(sb);
+		world.renderBack(sb);;
 		world.renderButton(sb, player);
 		InventoryButton.render(sb);
 		HeroButton.render(sb);
