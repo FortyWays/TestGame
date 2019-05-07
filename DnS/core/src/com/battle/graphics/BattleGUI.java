@@ -24,7 +24,7 @@ public class BattleGUI {
 	private Graphic bottom;
 	private Graphic top;
 	private Graphic currentTurn;
-	private Graphic deck;
+	public Graphic deck;
 	private Graphic background;
 	private Graphic health;
 	private Graphic stamina;
@@ -85,7 +85,8 @@ public class BattleGUI {
 				DnS.res.getAtlas("pack").findRegion("Deck").getRegionHeight(),
 				DnS.res.getAtlas("pack").findRegion("Deck"));
 		background=new Graphic(DnS.WIDTH/2, DnS.HEIGHT/2,
-				StageStorage.getBackground(state.stageName).getRegionWidth()*4,
+				//StageStorage.getBackground(state.stageName).getRegionWidth()*4,
+				DnS.WIDTH,
 				StageStorage.getBackground(state.stageName).getRegionHeight()*4,
 				StageStorage.getBackground(state.stageName));
 		selectButton=new Graphic(DnS.WIDTH/2, DnS.HEIGHT-30,
@@ -102,13 +103,15 @@ public class BattleGUI {
 				DnS.res.getAtlas("pack").findRegion("EndTurnButton"));
 		bottom=new Graphic(
 				DnS.WIDTH/2, DnS.res.getAtlas("pack").findRegion("Bottom2").getRegionHeight()*2,
-				DnS.res.getAtlas("pack").findRegion("Bottom2").getRegionWidth()*4,
+				//DnS.res.getAtlas("pack").findRegion("Bottom2").getRegionWidth()*4,
+				DnS.WIDTH,
 				DnS.res.getAtlas("pack").findRegion("Bottom2").getRegionHeight()*4,
 				DnS.res.getAtlas("pack").findRegion("Bottom2"));
 		top=new Graphic(
 				DnS.WIDTH/2, 
 				DnS.HEIGHT-DnS.res.getAtlas("pack").findRegion("Top2").getRegionHeight()*2,
-				DnS.res.getAtlas("pack").findRegion("Top2").getRegionWidth()*4,
+				//DnS.res.getAtlas("pack").findRegion("Top2").getRegionWidth()*4,
+				DnS.WIDTH,
 				DnS.res.getAtlas("pack").findRegion("Top2").getRegionHeight()*4,
 				DnS.res.getAtlas("pack").findRegion("Top2"));
 		health=new Graphic(

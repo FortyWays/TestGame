@@ -36,7 +36,7 @@ public class ItemPanel {
 				DnS.res.getAtlas("pack").findRegion("Panel1").getRegionHeight()*5,
 				DnS.res.getAtlas("pack").findRegion("Panel1"));
 		background=DnS.res.getAtlas("pack").findRegion("Background1");
-		sprite=new Graphic(DnS.WIDTH/2-180, DnS.HEIGHT/2+85, item.getSprite());
+		sprite=new Graphic(DnS.WIDTH/2-180, DnS.HEIGHT/2+85,40,40, item.getSprite());
 		name=new CustomFont(" "+item.getName(), DnS.WIDTH/2-30, DnS.HEIGHT/2+60, false);
 		description=new CustomFont(" "+item.getDescription(), DnS.WIDTH/2-60, DnS.HEIGHT/2+40, false);
 		if(!item.getCards().isEmpty()){

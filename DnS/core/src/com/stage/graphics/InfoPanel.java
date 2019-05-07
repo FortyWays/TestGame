@@ -1,16 +1,19 @@
 package com.stage.graphics;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.SortedIntList;
 import com.battle.card.Card;
 import com.battle.graphics.Animation;
 import com.battle.graphics.CustomFont;
 import com.battle.graphics.StatBar;
+import com.battle.player.BattleEntity;
 import com.fortyways.dns.DnS;
 import com.fortyways.storages.BattleEntityStorage;
 import com.fortyways.storages.SpriteStorage;
@@ -25,6 +28,9 @@ public class InfoPanel {
 	private TextureRegion background;
 	private ArrayList<Graphic> cards;
 	private ArrayList<Card> deck;
+	private ArrayList<Card> sorteddeck;
+	private int[] cardAmount ;
+
 	private CustomFont nameTag;
 	private StatBar hpBar;
 	private StatBar spBar;
@@ -68,6 +74,15 @@ public class InfoPanel {
 		for(Card card:deck){
 			if(!sortedDeck.contains(card)){
 				sortedDeck.add(card);
+			}
+		}
+		sorteddeck=sortedDeck;
+		cardAmount=new int[sortedDeck.size()];
+		for(Card card:deck){
+			for(int i=0;i<sortedDeck.size();i++){
+				if(sortedDeck.get(i)==card){
+					cardAmount[i]++;
+				}
 			}
 		}
 		this.deck=sortedDeck;
@@ -141,6 +156,14 @@ public class InfoPanel {
 		mpBar.UpdateBar(mp);
 	}
 	
+	public void updateCardAmount(HashMap<Card, BattleEntity> decision){
+		for(Card card:decision.keySet())
+		{
+			if(sorteddeck.contains(card))
+			cardAmount[sorteddeck.indexOf(card)]--;
+		}
+	}
+	
 	public void render(SpriteBatch spriteBatch){
 		spriteBatch.draw(background, DnS.WIDTH/2-220, DnS.HEIGHT/2+22, 200, 120);
 		idleAnim.render(spriteBatch);
@@ -162,6 +185,7 @@ public class InfoPanel {
 				font.draw(spriteBatch, deck.get(selnum).description, descArt.x-60, descArt.y+80);
 			}
 			gr.render(spriteBatch);
+			font.draw(spriteBatch, Integer.toString(cardAmount[cards.indexOf(gr)]), gr.x, gr.y);
 		}
 		}
 	}

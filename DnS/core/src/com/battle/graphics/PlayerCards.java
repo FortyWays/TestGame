@@ -42,7 +42,7 @@ public class PlayerCards {
 		cards=new ArrayList<>();
 		for (int i=0;i<cardsinhand.size();i++) {
 			Card card=cardsinhand.get(i);
-			cards.add(new Graphic(i*60+200, 50,
+			cards.add(new Graphic(i*60+240, 50,
 					card.cardArt.getRegionWidth(),card.cardArt.getRegionHeight(),card.cardArt));
 		}
 		selected=false;

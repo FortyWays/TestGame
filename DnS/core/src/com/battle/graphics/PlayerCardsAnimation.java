@@ -24,7 +24,7 @@ public class PlayerCardsAnimation {
 		
 		newPositions=new int[playerCards.cards.size()];
 		for (int i=0;i<newPositions.length;i++) {
-			newPositions[i]=i*60+200;
+			newPositions[i]=i*60+240;
 		}
 	}
 	
