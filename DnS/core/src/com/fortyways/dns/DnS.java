@@ -6,12 +6,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.fortyways.state.BattleState;
+import com.fortyways.state.EncounterState;
 import com.fortyways.state.GSM;
 import com.fortyways.state.HeroSelectState;
 import com.fortyways.state.MainMenuState;
 import com.fortyways.state.StageState;
 import com.fortyways.storages.BattleEntityStorage;
 import com.fortyways.storages.CardStorage;
+import com.fortyways.storages.EncounterStorage;
 import com.fortyways.storages.ItemStorage;
 import com.fortyways.storages.SpriteStorage;
 import com.fortyways.storages.StageStorage;
@@ -37,8 +39,10 @@ public class DnS extends ApplicationAdapter {
 		BattleEntityStorage.init();
 		StageStorage.init();
 		ItemStorage.init();
+		EncounterStorage.init();
 		//gsm.set(new StageState(gsm));
-		gsm.set(new MainMenuState(gsm));
+		gsm.set(new EncounterState(gsm));
+		//gsm.set(new MainMenuState(gsm));
 		//gsm.set(new BattleState(gsm));
 		//gsm.set(new HeroSelectState(gsm));
 		
