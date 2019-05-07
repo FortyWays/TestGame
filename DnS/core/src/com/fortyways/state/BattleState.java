@@ -16,13 +16,16 @@ import com.battle.graphics.FadingAnimation;
 import com.battle.graphics.PlayerCards;
 import com.battle.player.BattleEnemy;
 import com.battle.player.BattleEntity;
+import com.battle.player.BattleMinion;
 import com.battle.player.BattlePlayer;
 import com.battle.turn.PlayerTurn;
 import com.battle.turn.Turn;
+import com.encounter.EncounterPlayer;
 import com.fortyways.dns.DnS;
 import com.fortyways.storages.CardStorage;
 import com.fortyways.util.Rectangle;
 import com.fortyways.util.StageToBattleTransfer;
+import com.stage.graphics.DeckPanel;
 import com.stage.player.StageEnemy;
 import com.stage.player.StagePlayer;
 
@@ -31,6 +34,7 @@ public class BattleState extends State{
 	public BattlePlayer player;
 	public  ArrayList<BattleEntity> enemyEnties; 
 	public  ArrayList<BattleEnemy> enemies; 
+	public  ArrayList<BattleMinion> minions;
 	public ArrayList<BattleEntity> enties;
 	
 	
@@ -41,23 +45,26 @@ public class BattleState extends State{
 	//GUI
 	BitmapFont font =new BitmapFont();
 	BattleGUI gui;
+	DeckPanel deckPanel;
 	//State of the game
 	
 	boolean waitingForTarget=false;
 	private int currentAIAnimatedNumber;
+	private int currentAIAnimatedNumberMinions;
 	public boolean gameFinished=false;
 	public boolean playerWon=false;
 	private boolean inPanel=false;
-	
+	private boolean animatingminions=true;
+	private boolean inDeck=false;
 	//Transfer to stage
 	public String stageName;
-	StagePlayer stagePlayer;
+	EncounterPlayer encounterPlayer;
 	StageEnemy stageEnemy;
 	ArrayList<StageEnemy> removedEnemies;
 	
 	
 	public int DarkPresence=0;
-	private BattleEnemy selectedEnemy;
+	private BattleEntity selectedEnemy;
 	
 	private Rectangle panelRect=new Rectangle(DnS.WIDTH/2, DnS.HEIGHT/2, 500, 300);
 	public int cardsPlayed=0;
@@ -67,6 +74,7 @@ public class BattleState extends State{
 		
 		this.player=player;
 		this.enemyEnties=enemies;
+		minions=new ArrayList<>();
 		turns=new ArrayList<>();
 		turns.add(new PlayerTurn(1));//player goes first as default
 		player.FillEmptyHand(5);
@@ -84,11 +92,12 @@ public class BattleState extends State{
 		turns=new ArrayList<>();
 		turns.add(new PlayerTurn(1));
 		this.player=StageToBattleTransfer.trasferPlayer(stagePlayer);
+		DarkPresence+=player.getDpMod();
 		this.removedEnemies=removed;
-		this.stagePlayer=stagePlayer;
+		this.encounterPlayer=stagePlayer;
 		this.stageName=stagePlayer.stageName;
 		this.stageEnemy=stageEnemy;
-		
+		minions=new ArrayList<>();
 		enemies=new ArrayList<>();
 		enemies.add(new BattleEnemy(stageEnemy.getEntityName(),0,stageName));
 		
@@ -117,7 +126,46 @@ public class BattleState extends State{
 			enties.add(enemy);
 		}
 		gui=new BattleGUI(this);
-		//DarkPresence++;
+	
+	}
+	public BattleState(GSM gsm,EncounterPlayer encounterPlayer,ArrayList<String>enemyTags) {
+		super(gsm);
+		
+		turns=new ArrayList<>();
+		turns.add(new PlayerTurn(1));
+		this.encounterPlayer=encounterPlayer;
+		this.player=StageToBattleTransfer.trasferPlayer(encounterPlayer);
+		DarkPresence+=player.getDpMod();
+
+		this.stageName=encounterPlayer.stageName;
+		minions=new ArrayList<>();
+		enemies=new ArrayList<>();
+		int i=0;
+		for(String name: enemyTags){
+		enemies.add(new BattleEnemy(name,i,stageName));i++;}
+		
+		for(BattleEnemy enemy:enemies){
+			enemy.setUpAi(this);
+		}
+		
+		enemyEnties=new ArrayList<BattleEntity>();
+		for(BattleEnemy enemy:enemies){
+			enemyEnties.add(enemy);
+		}
+		
+	
+		for(BattleEnemy enemy:enemies){
+			enemy.FillEmptyHand(7);
+		}
+		
+		player.FillEmptyHand(player.getStartingCardAmount());
+		enties=new ArrayList<>();
+		enties.add(player);
+		for(BattleEntity enemy:enemyEnties){
+			enties.add(enemy);
+		}
+		gui=new BattleGUI(this);
+	
 	}
 	public BattleState(GSM gsm) {
 		super(gsm);
@@ -137,6 +185,7 @@ public class BattleState extends State{
 		turns.add(new PlayerTurn(1));
 		player=new BattlePlayer(50, 50, 50,5,5,5, playerDeck,"player-ranger");
 		enemies=new ArrayList<>();
+		minions=new ArrayList<>();
 		enemies.add(new BattleEnemy("goblin-berserk",0,stageName));
 		enemies.get(0).setUpAi(this);
 		//enemies.add(new BattleEnemy("goblin-archer",1));
@@ -171,17 +220,30 @@ public class BattleState extends State{
 				else
 				selectedEnemy.panel.handleInput(mouse.x, mouse.y);
 			}
+			if(inDeck){
+				if(!panelRect.Touched(mouse.x, mouse.y)){
+					inDeck=false;
+				}
+				else
+				deckPanel.handleInput(mouse.x, mouse.y);
+			}
 			
 		if(isPlayersTurn()&&!gameFinished&&!inPanel){
 		
 			
 			if(!waitingForTarget)
-			for(BattleEnemy enemy:enemies){
-				if(enemy.getIdleAnim().Touched(mouse.x, mouse.y)){
+			for(BattleEntity enemy:enties){
+				if(enemy.getIdleAnim().Touched(mouse.x, mouse.y) && enemy!=player){
 					selectedEnemy=enemy;
 					inPanel=true;
 					break;
 				}
+			}
+			
+			if(gui.deck.Touched(mouse.x, mouse.y)){
+				deckPanel=new DeckPanel(player.getDeck());
+				inDeck=true;
+				
 			}
 			//TODO SORT THIS OUT
 			
@@ -233,10 +295,11 @@ public class BattleState extends State{
 	public void handleGameFinishedInput(float x, float y) {
 		
 		if(gui.VictoryScreen.Touched(x,y)&&playerWon){
-			removedEnemies.add(stageEnemy);
-			stagePlayer.setStats(player.getHp(), player.getSp(), player.getMp());
-			gsm.set(new StageState(gsm, stagePlayer, removedEnemies));
-			
+			//removedEnemies.add(stageEnemy);
+			encounterPlayer.setStats(player.getHp(), player.getSp(), player.getMp());
+			gsm.set(new EncounterState(gsm,encounterPlayer));
+			//gsm.set(new StageState(gsm, encounterPlayer, removedEnemies));
+			//
 		}
 		else if(gui.DefeatScreen.Touched(x, y)&&!playerWon){
 			gsm.set(new MainMenuState(gsm));
@@ -265,6 +328,30 @@ public class BattleState extends State{
 		
 	}
 	private void processAITurn(){
+		
+		for(BattleMinion minion:minions){
+			if(!minion.getStunned()&&!minion.isDead())
+				minion.getAi().MakeDecision();
+			if(!minion.getAi().decided()&&!minion.isDead()&&!minion.getStunned()){
+				minion.addMessageAnimation("pass", "red", 90);
+			}
+			else if(minion.hasNoPlay()&&!minion.isDead()&&!minion.getStunned()){
+				minion.addMessageAnimation("outofcards", "red", 90);
+			}
+		}
+		for(int i=0;i<minions.size();i++){
+			if(!minions.get(i).getStunned()
+					&&!minions.get(i).isDead()
+					&&minions.get(i).getAi().decided()
+					){
+				minions.get(i).getAi().setAnimating(true);
+				currentAIAnimatedNumberMinions=i;
+				break;
+			}
+		}
+		
+		
+		
 		
 		for(BattleEnemy enemy:enemies){
 			if(!enemy.getStunned()&&!enemy.isDead())
@@ -305,7 +392,7 @@ public class BattleState extends State{
 				}, 2);
 			}
 			}
-			
+		
 		
 		
 		
@@ -328,6 +415,25 @@ public class BattleState extends State{
 		
 		gui.update(dt);
 		player.update(dt);
+		
+		if(currentAIAnimatedNumberMinions<minions.size()){
+		
+		if(!isPlayersTurn()&& currentAIAnimatedNumberMinions<minions.size()){
+			if(minions.get(currentAIAnimatedNumberMinions).getAi().isAnimating())
+				minions.get(currentAIAnimatedNumberMinions).getAi().update(dt);
+			else{
+				currentAIAnimatedNumberMinions++;
+				
+				if(currentAIAnimatedNumberMinions<minions.size()
+						&&!minions.get(currentAIAnimatedNumberMinions).getStunned()
+								&&!minions.get(currentAIAnimatedNumberMinions).isDead()
+								&&minions.get(currentAIAnimatedNumberMinions).getAi().decided()){
+					minions.get(currentAIAnimatedNumberMinions).getAi().setAnimating(true);
+				}
+			}
+		}
+		}
+		else
 		if(!isPlayersTurn()&& currentAIAnimatedNumber<enemies.size()){
 			if(enemies.get(currentAIAnimatedNumber).getAi().isAnimating())
 			enemies.get(currentAIAnimatedNumber).getAi().update(dt);
@@ -353,12 +459,18 @@ public class BattleState extends State{
 				}
 			}
 		}
+		for(BattleMinion minion:minions){
+			minion.update(dt);
+		}
 		for(BattleEntity enemy:enemies){
 			enemy.update(dt);
 			
 		}
 		if(inPanel){
 			selectedEnemy.panel.update(dt);
+		}
+		if(inDeck){
+			deckPanel.update(dt);
 		}
 	}
 
@@ -376,11 +488,20 @@ public class BattleState extends State{
 		gui.render(spriteBatch,waitingForTarget);
 		player.renderBars(spriteBatch);
 		
+		if(currentAIAnimatedNumberMinions<minions.size()){
+			
+		if(!isPlayersTurn()&&currentAIAnimatedNumberMinions<minions.size()){
+			minions.get(currentAIAnimatedNumberMinions).getAi().render(spriteBatch);
+		}
+		}else
 		if(!isPlayersTurn()&&currentAIAnimatedNumber<enemies.size()){
 				enemies.get(currentAIAnimatedNumber).getAi().render(spriteBatch);
 		}
 		if(inPanel){
 			selectedEnemy.panel.render(spriteBatch);
+		}
+		if(inDeck){
+			deckPanel.render(spriteBatch);
 		}
 		
 		spriteBatch.end();

@@ -9,8 +9,10 @@ import com.battle.card.Card;
 import com.battle.graphics.Animation;
 import com.battle.graphics.ColorSwitchAnimation;
 import com.battle.graphics.FadingAnimation;
+import com.battle.graphics.StatBar;
 import com.fortyways.storages.SpriteStorage;
 import com.fortyways.util.Graphic;
+import com.stage.graphics.InfoPanel;
 
 
 public abstract class BattleEntity {
@@ -26,6 +28,10 @@ public abstract class BattleEntity {
 	protected int maxsp;
 	protected int maxmp;
 	
+	protected StatBar hpBar;
+	protected StatBar spBar;
+	protected StatBar mpBar;
+	
 	public String entityName;
 	protected TextureRegion sprite=null;
 	protected Animation idleAnim=null;
@@ -40,7 +46,7 @@ public abstract class BattleEntity {
 	public ArrayList<Card> cardsInHand;
 	protected ArrayList<Card> deck;
 	
-	
+	public InfoPanel panel;
 	
 	protected BattleEntity(int maxhp,int maxsp,int maxmp, 
 			int hpregen,int spregen,int mpregen,ArrayList<Card> deck){
@@ -247,6 +253,12 @@ public abstract class BattleEntity {
 	public boolean getImmuneToBleed(){
 		return this.effects.isImmuneBleed();
 	}
+	public boolean getImmuneToFire(){
+		return this.effects.isImmuneFire();
+	}
+	public void setImmuneToFire(boolean immune){
+		this.effects.setImmuneFire(immune);
+	}
 	public void setImmuneToPoison(boolean immune){
 		this.effects.setImmunePoison(immune);
 	}
@@ -281,6 +293,18 @@ public abstract class BattleEntity {
 		
 		}
 	}
+	public void applyFire(){
+		if(effects.isOnFire()){
+		PlayOnHitAnimation();
+		addMessageAnimation("on fire "+"-"+effects.getFireDmg(), "red", 90);
+		effects.setFireTurns(effects.getFireTurns()-1);
+		ChangeHP(-effects.getFireDmg());
+		if(effects.getFireTurns()==0){
+			setOnFire(false);
+		}
+		
+		}
+	}
 	public void applyMarked(){
 		if(effects.isMarked()){
 			effects.setMarkedTurns(effects.getMarkedTurns()-1);
@@ -289,6 +313,45 @@ public abstract class BattleEntity {
 			}
 		}
 	}
+	public int getMaxhp() {
+		return maxhp;
+	}
+	public int getMaxmp() {
+		return maxmp;
+	}
+	public int getMaxsp() {
+		return maxsp;
+	}	
+	public void setExtraTurn(boolean extraTurn) {
+		effects.setExtraTurn(extraTurn);
+	}
+	public boolean isExtraTurn() {
+		return effects.isExtraTurn();
+	}
 
-	
+
+
+	public boolean isOnFire() {
+		return this.effects.isOnFire();
+	}
+	public void setOnFire(boolean onfire) {
+		if(onfire!=this.effects.isOnFire()){
+			animHandler.setOnFireIcon(onfire);}
+		this.effects.setOnFire(onfire); 
+	}
+	public void setRangedFire(boolean rangedfire){
+		effects.setRangedFire(rangedfire);
+	}
+	public void setDpMod(int dpmod){
+		effects.setDpMod(dpmod);
+	}
+	public boolean getRangedFire(){
+		return effects.isRangedFire();
+	}
+	public int getDpMod(){
+		return effects.getDpMod();
+	}
+	public ArrayList<Card> getDeck() {
+		return deck;
+	}
 }

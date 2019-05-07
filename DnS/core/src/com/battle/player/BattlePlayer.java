@@ -19,7 +19,7 @@ public class BattlePlayer extends BattleEntity{
 	private StatBar spBar;
 	private StatBar mpBar;
 	private int startingCardAmount=5;
-	
+	public PlayerItemEffects pie;
 	public BattlePlayer(int maxhp,int maxsp,int maxmp,
 			int hpregen,int spregen,int mpregen,ArrayList<Card> deck,String name)
 	{
@@ -33,6 +33,7 @@ public class BattlePlayer extends BattleEntity{
 				SpriteStorage.getIdleAnimationSpriteSheet(name)
 				,20, SpriteStorage.getFrameProportions(name)[0]
 				,SpriteStorage.getFrameProportions(name)[1]));
+		animHandler.setFireAnim();
 		this.entityName="player-warrior";
 		hpBar=new StatBar(80, 30, 
 				maxhp, "hp2");
@@ -40,6 +41,7 @@ public class BattlePlayer extends BattleEntity{
 				maxmp, "mp2");
 		spBar=new StatBar(80, 30+hpBar.height*2-4, 
 				maxsp, "sp2");
+		pie = new PlayerItemEffects();
 	}
 	
 	public void renderBars(SpriteBatch spriteBatch){
