@@ -14,7 +14,7 @@ public class Card {
 	public String description="";
 	public TextureRegion cardArt;
 	public CardEffectAttributes[] cardInstructions;
-	public int requiredDP=0;
+	public int requiredDP=-10;
 
 	public Card(int spcost,int mpcost,String cardId,
 			TextureRegion cardArt,CardEffectAttributes[] instructions){
