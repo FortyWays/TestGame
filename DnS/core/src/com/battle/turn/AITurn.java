@@ -41,6 +41,7 @@ public class AITurn extends Turn{
 					ent.applyBleed();
 					ent.applyPoison();
 					ent.applyMarked();
+					ent.applyFire();
 					}
 			}
 		}

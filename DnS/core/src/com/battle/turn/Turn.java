@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.battle.graphics.BattleGUI;
 import com.battle.player.BattleEntity;
+import com.battle.player.BattleMinion;
 import com.battle.player.BattlePlayer;
 
 public abstract class Turn {
@@ -27,7 +28,7 @@ public abstract class Turn {
 				}
 			}
 			else{
-				if(!ent.isDead()){
+				if(!ent.isDead()&&ent.getClass()!=BattleMinion.class){
 					gameFinished=false;
 					return;
 				}
