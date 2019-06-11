@@ -22,6 +22,7 @@ public class EncounterStorage {
 		ArrayList<Option> options=new ArrayList<>();
 		Option option=new Option("Attack them",0);
 		ArrayList<String> enemyTags=new ArrayList<>();
+		enemyTags.add("goblin-berserk");
 		enemyTags.add("goblin-archer");
 		Outcome outcome = new Outcome("You won", enemyTags);
 		outcome.foodgain=2;
@@ -106,6 +107,7 @@ public class EncounterStorage {
 		option.setOutcomes(outcomes);
 		options.add(option);
 		option=new Option("Try to feed it", 1);
+		option.setRequiredFood(2);
 		outcome=new Outcome("It consumes the food and lets you through");
 		outcomes=new ArrayList<>();
 		outcomes.add(outcome);
@@ -113,6 +115,50 @@ public class EncounterStorage {
 		options.add(option);
 		encounter.setOptions(options);
 		Encounters.put("Slimes!", encounter);
+		
+
+		encounter =new Encounter("Strange Shrine", 
+				DnS.res.getAtlas("pack").findRegion("BossEncounter"),
+				"There strange shrine to an unknown deity amidst the sands."
+				+ "\n It seems to await some sort of offering.");
+		options=new ArrayList<>();
+		option=new Option("Offer your blood",0);
+		
+		outcome = new Outcome("You feel a new power inside of you(d)");
+		outcome.awardCards.add(CardStorage.getCard("PurityDefense"));
+		outcome.hpgain=-15;
+		outcomes=new ArrayList<>();
+		outcomes.add(outcome);
+		outcome = new Outcome("You feel a new power inside of you(a)");
+		outcome.awardCards.add(CardStorage.getCard("PurityAttack"));
+		outcome.hpgain=-15;
+		outcomes.add(outcome);
+		option.setOutcomes(outcomes);
+		options.add(option);
+		
+		option=new Option("Offer Food", 1);
+		option.setRequiredFood(2);
+		outcome=new Outcome("You feel rejuvenated");
+		outcome.hpgain=15;
+		outcome.spgain=15;
+		outcome.mpgain=15;
+		outcomes=new ArrayList<>();
+		outcomes.add(outcome);
+		option.setOutcomes(outcomes);
+		options.add(option);
+
+		option=new Option("Offer Money", 2);
+		option.setRequiredMoney(50);
+		outcome=new Outcome("A strange object appears...");
+		outcome.itemgain=true;
+		outcomes=new ArrayList<>();
+		outcomes.add(outcome);
+		option.setOutcomes(outcomes);
+		options.add(option);
+		encounter.setOptions(options);
+		Encounters.put("Strange Shrine", encounter);
+		
+		
 		
 	}
 	public static Encounter getRandomEncounter(){
