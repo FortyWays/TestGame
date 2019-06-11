@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.battle.card.Card;
 import com.battle.graphics.FadingAnimation;
 import com.battle.player.BattleEnemy;
 import com.fortyways.dns.DnS;
@@ -25,6 +26,7 @@ public class Outcome {
 	public boolean showingResult=false;
 	public Item item;
 	public ArrayList<Graphic >cards=new ArrayList<>();
+	public ArrayList<Card> awardCards=new ArrayList<>();
 	public ArrayList<FadingAnimation>anims=new ArrayList<>();
 	public ArrayList<String> enemyTags;
 	private String text;
