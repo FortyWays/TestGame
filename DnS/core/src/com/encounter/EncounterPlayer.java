@@ -97,7 +97,7 @@ public String stageName;
 			setStats(40, 40, 30);
 			setRegens(5, 5, 1);
 			equipItem(ItemStorage.getItem("DullSword"));
-			//equipItem(ItemStorage.getItem("Antivenom"));
+			equipItem(ItemStorage.getItem("Antivenom"));
 		
 		}
 		hpbar=new StatBar(60, DnS.HEIGHT-15, maxhp, "hp2");
@@ -132,13 +132,13 @@ public String stageName;
 		hpbar.render(spriteBatch);
 		spbar.render(spriteBatch);
 		mpbar.render(spriteBatch);
-		for(int i=0;i<equipped.size();i++){
+		/*for(int i=0;i<equipped.size();i++){
 			Item item=equipped.get(i);
 		//	item.x=20+50*i;
 		//	item.y=20;
 			//System.out.println(item.getName()+" "+item.x);
 			item.render(spriteBatch);
-		}
+		}*/
 	}
 	public void setStats(int hp,int sp,int mp){
 		this.hp=hp;
@@ -301,6 +301,10 @@ public String stageName;
 		fameDisplay=new CustomFont(Integer.toString(fame), DnS.WIDTH/2+40, DnS.HEIGHT-15, "purple");
 	}
 	public void addCard(Card card){
+		extraCards.add(card);
+	}
+	public void addCard(ArrayList<Card> cards){
+		for(Card card:cards)
 		extraCards.add(card);
 	}
 }
