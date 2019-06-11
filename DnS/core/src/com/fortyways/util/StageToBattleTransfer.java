@@ -27,7 +27,7 @@ public class StageToBattleTransfer {
 			playerDeck.add(CardStorage.getCard("Steady Shot"));
 			playerDeck.add(CardStorage.getCard("Steady Shot"));
 			playerDeck.add(CardStorage.getCard("Steady Shot"));*/
-			playerDeck.add(CardStorage.getCard("TestHeal1"));
+			//playerDeck.add(CardStorage.getCard("TestHeal1"));
 			for(Item item:player.equipped){
 				if(!item.getCards().isEmpty()){
 					for(Card card:item.getCards()){
@@ -48,19 +48,16 @@ public class StageToBattleTransfer {
 		//	playerDeck.add(CardStorage.getCard("TestAttack1"));
 		//	playerDeck.add(CardStorage.getCard("TestAttack1"));
 		//	playerDeck.add(CardStorage.getCard("TestAttack1"));
-			playerDeck.add(CardStorage.getCard("TestHeal1"));
+		//	playerDeck.add(CardStorage.getCard("TestHeal1"));
 		//	playerDeck.add(CardStorage.getCard("TestAttack2"));
 		//	playerDeck.add(CardStorage.getCard("TestAttack2"));
 		//	playerDeck.add(CardStorage.getCard("TestStun"));
 		//	playerDeck.add(CardStorage.getCard("TestStun"));
-			playerDeck.add(CardStorage.getCard("Inspired"));
-			playerDeck.add(CardStorage.getCard("Inspired"));
-			playerDeck.add(CardStorage.getCard("Bolster"));
-			playerDeck.add(CardStorage.getCard("Bolster"));
-			playerDeck.add(CardStorage.getCard("PurityDefense"));
-			playerDeck.add(CardStorage.getCard("PurityDefense"));
-			playerDeck.add(CardStorage.getCard("PurityDefense"));
-			playerDeck.add(CardStorage.getCard("PurityDefense"));
+		//	playerDeck.add(CardStorage.getCard("Inspired"));
+		//	playerDeck.add(CardStorage.getCard("Inspired"));
+		//	playerDeck.add(CardStorage.getCard("Bolster"));
+		//	playerDeck.add(CardStorage.getCard("Bolster"));
+		
 			
 			for(Item item:player.equipped){
 				if(!item.getCards().isEmpty()){
@@ -73,7 +70,7 @@ public class StageToBattleTransfer {
 				playerDeck.add(card);
 			}
 			result=new BattlePlayer(player.getMaxhp(),player.getMaxsp() , player.getMaxmp(),
-			player.getHpregen(), player.getSpregen(), player.getMpregen(), playerDeck,player.playerName);
+			player.getHpregen(), player.getSpregen(), player.getMpregen(), playerDeck,"player-warrior");
 			result.setStartingCardAmount(6);
 		}
 		result.setMeleeBlock(player.isMeleeBlock());
