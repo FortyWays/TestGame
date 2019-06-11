@@ -50,11 +50,15 @@ public class Encounter {
 		    this.continueOption=another.continueOption;
 		    this.font=another.font;
 	 }
-	public void handleInput(float x,float y){
+	public void handleInput(float x,float y,EncounterPlayer player){
 		for(Option option: options){
-				if(option.background.Touched(x, y)){
+				if(option.background.Touched(x, y)
+						&&player.getFood()>=option.getRequiredFood()
+						&&player.getMoney()>=option.getRequiredMoney()){
 					chosen=true;
 					chosenOption=option;
+					player.food-=option.getRequiredFood();
+					player.money-=option.getRequiredMoney();
 				}
 		}
 	}
