@@ -23,6 +23,7 @@ public class ItemStorage {
 		Items.put("Speed Stone", new Item("Speed Stone",
 				"You can play one extra card per turn", 500,
 				temp, DnS.res.getAtlas("pack").findRegion("SpeedStone")));
+		Items.get("Speed Stone").setSlot(Item.Slot.MISCELLANEOUS);
 		
 		temp =new ItemEffectAttributes[3];
 		temp[0]=new ItemEffectAttributes("meleeblock", 1);
@@ -31,22 +32,26 @@ public class ItemStorage {
 		Items.put("Shield Ring", new Item("Shield Ring",
 				"Gain Melee, Ranged and Magic Block at the start of the battle ", 500,
 				temp, DnS.res.getAtlas("pack").findRegion("ShieldRing")));
+		Items.get("Shield Ring").setSlot(Item.Slot.MISCELLANEOUS);
 		
 		temp =new ItemEffectAttributes[1];
 		temp[0]=new ItemEffectAttributes("addmaxhp", 10);
 		Items.put("Small Health Stone", new Item("Small Health Stone",
 				"Gain 10 maximum health ", 100,
 				temp, DnS.res.getAtlas("pack").findRegion("SmallHealthStone")));
+		Items.get("Small Health Stone").setSlot(Item.Slot.MISCELLANEOUS);
 		temp =new ItemEffectAttributes[1];
 		temp[0]=new ItemEffectAttributes("addmaxsp", 10);
 		Items.put("Small Stamina Stone", new Item("Small Stamina Stone",
 				"Gain 10 maximum stamina ", 100,
 				temp, DnS.res.getAtlas("pack").findRegion("SmallStaminaStone")));
+		Items.get("Small Stamina Stone").setSlot(Item.Slot.MISCELLANEOUS);
 		temp =new ItemEffectAttributes[1];
 		temp[0]=new ItemEffectAttributes("addmaxmp", 10);
 		Items.put("Small Mana Stone", new Item("Small Mana Stone",
 				"Gain 10 maximum mana ", 100,
 				temp, DnS.res.getAtlas("pack").findRegion("SmallManaStone")));
+		Items.get("Small Mana Stone").setSlot(Item.Slot.MISCELLANEOUS);
 		
 		
 		temp =new ItemEffectAttributes[2];
@@ -55,12 +60,14 @@ public class ItemStorage {
 		Items.put("Spellbound Armor", new Item("Spellbound Armor",
 				"Set your hp to 30 reset it at the start of your turn ", 1000,
 				temp, DnS.res.getAtlas("pack").findRegion("Armor1")));
+		Items.get("Spellbound Armor").setSlot(Item.Slot.ARMOR);
 		
 		temp =new ItemEffectAttributes[1];
 		temp[0]=new ItemEffectAttributes("immunepoison", 1);
 		Items.put("Antivenom", new Item("Antivenom",
 				"Immune to poison", 500,
 				temp, DnS.res.getAtlas("pack").findRegion("Antivenom")));
+		Items.get("Antivenom").setSlot(Item.Slot.MISCELLANEOUS);
 		
 		temp =new ItemEffectAttributes[1];
 		temp[0]=new ItemEffectAttributes("", 1);
@@ -76,7 +83,7 @@ public class ItemStorage {
 		cards.add(CardStorage.getCard("TestStun"));
 		cards.add(CardStorage.getCard("TestStun"));
 		Items.get("DullSword").setCards(cards);
-		Items.get("DullSword").setSlot("weapon");
+		Items.get("DullSword").setSlot(Item.Slot.PRIMARY);
 		Items.get("DullSword").setClassName("player-warrior");
 		temp =new ItemEffectAttributes[1];
 		temp[0]=new ItemEffectAttributes("", 1);
@@ -86,6 +93,7 @@ public class ItemStorage {
 		cards=new ArrayList<>();
 		cards.add(CardStorage.getCard("Stop Time"));
 		Items.get("Magic Clock").setCards(cards);
+		Items.get("Magic Clock").setSlot(Item.Slot.MISCELLANEOUS);
 		//Items.get("Magic Clock").setSlot("misc");
 		
 		temp =new ItemEffectAttributes[1];
@@ -104,13 +112,13 @@ public class ItemStorage {
 		cards.add(CardStorage.getCard("Steady Shot"));
 		
 		Items.get("Wooden Bow").setClassName("player-ranger");
-		Items.get("Wooden Bow").setSlot("weapon");
+		Items.get("Wooden Bow").setSlot(Item.Slot.PRIMARY);
 		Items.get("Wooden Bow").setCards(cards);
 		
 		Items.put("Charged Sword", new Item("Charged Sword",
 				"", 500,
 				temp, DnS.res.getAtlas("pack").findRegion("ChargedSword")));
-		Items.get("Charged Sword").setSlot("weapon");
+		Items.get("Charged Sword").setSlot(Item.Slot.PRIMARY);
 		Items.get("Charged Sword").setClassName("player-warrior");
 		cards=new ArrayList<>();
 		cards.add(CardStorage.getCard("AutomatonAttack"));
@@ -122,7 +130,7 @@ public class ItemStorage {
 		Items.put("Skeleton Staff", new Item("Skeleton Staff",
 				"", 500,
 				temp, DnS.res.getAtlas("pack").findRegion("SkullStaff")));
-		Items.get("Skeleton Staff").setSlot("weapon");
+		Items.get("Skeleton Staff").setSlot(Item.Slot.PRIMARY);
 		//Items.get("Skeleton Staff").setClassName("player-warrior");
 		cards=new ArrayList<>();
 		cards.add(CardStorage.getCard("SummonSkeletonMinion"));
@@ -132,7 +140,7 @@ public class ItemStorage {
 		Items.put("Totem Mace", new Item("Totem Mace",
 				"", 500,
 				temp, DnS.res.getAtlas("pack").findRegion("TotemMace")));
-		Items.get("Totem Mace").setSlot("weapon");
+		Items.get("Totem Mace").setSlot(Item.Slot.PRIMARY);
 		//Items.get("Skeleton Staff").setClassName("player-warrior");
 		cards=new ArrayList<>();
 		cards.add(CardStorage.getCard("TotemMaceAttack"));
@@ -149,7 +157,7 @@ public class ItemStorage {
 				"All your ranged attacks set target on fire\n"
 				+ "Reduce Dark Presence by 1", 100,
 				temp, DnS.res.getAtlas("pack").findRegion("Torch")));
-		Items.get("Torch").setSlot("secondary");
+		Items.get("Torch").setSlot(Item.Slot.SECONDARY);
 		cards=new ArrayList<>();
 		cards.add(CardStorage.getCard("TorchAttack"));
 		cards.add(CardStorage.getCard("TorchAttack"));
