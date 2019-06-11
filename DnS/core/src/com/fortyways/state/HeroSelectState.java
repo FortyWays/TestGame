@@ -3,9 +3,13 @@ package com.fortyways.state;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.battle.graphics.Animation;
+import com.battle.graphics.PlayerCards;
+import com.encounter.EncounterPlayer;
 import com.fortyways.dns.DnS;
 import com.fortyways.storages.SpriteStorage;
 import com.fortyways.util.Graphic;
+import com.fortyways.util.StageToBattleTransfer;
+import com.stage.graphics.DeckPanel;
 
 public class HeroSelectState extends State{
 
@@ -13,6 +17,7 @@ public class HeroSelectState extends State{
 	private Animation rangerAnim;
 	private Graphic warriorSign;
 	private Graphic rangerSign;
+	private PlayerCards deckPanel;
 	public HeroSelectState(GSM gsm) {
 		super(gsm);
 		String name="player-warrior";
@@ -33,6 +38,8 @@ public class HeroSelectState extends State{
 				DnS.res.getAtlas("pack").findRegion("WarriorSign"));
 		rangerSign=new Graphic(rangerAnim.x, rangerAnim.y+70, 37*3, 13*3, 
 				DnS.res.getAtlas("pack").findRegion("RangerSign"));
+		deckPanel=new PlayerCards(StageToBattleTransfer.
+				trasferPlayer(new EncounterPlayer("player-warrior")).getDeck());
 	}
 
 	@Override
@@ -41,11 +48,12 @@ public class HeroSelectState extends State{
 			mouse.x=Gdx.input.getX();
 			mouse.y=Gdx.input.getY();
 			cam.unproject(mouse);
+			deckPanel.handleInput(mouse.x, mouse.y);
 			if(warriorSign.Touched(mouse.x, mouse.y)){
-				gsm.set(new TransitionFadeState(gsm, this, new StageState(gsm,"player-warrior")));
+				//gsm.set(new TransitionFadeState(gsm, this, new StageState(gsm,"player-warrior")));
 			}
 			else if(rangerSign.Touched(mouse.x, mouse.y)){
-				gsm.set(new TransitionFadeState(gsm, this, new StageState(gsm,"player-ranger")));
+				//gsm.set(new TransitionFadeState(gsm, this, new StageState(gsm,"player-ranger")));
 			}
 		}
 		
@@ -56,6 +64,7 @@ public class HeroSelectState extends State{
 		handleInput();
 		rangerAnim.update(dt);
 		warriorAnim.update(dt);
+		deckPanel.update(dt);
 	}
 
 	@Override
@@ -63,10 +72,11 @@ public class HeroSelectState extends State{
 		//Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		sb.setProjectionMatrix(cam.combined);
 		sb.begin();
-		rangerAnim.render(sb);
+		//rangerAnim.render(sb);
+		deckPanel.render(sb);
 		warriorAnim.render(sb);
 		warriorSign.render(sb);
-		rangerSign.render(sb);
+		//rangerSign.render(sb);
 		sb.end();
 	}
 
