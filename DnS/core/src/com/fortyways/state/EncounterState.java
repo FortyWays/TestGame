@@ -1,5 +1,7 @@
 package com.fortyways.state;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,11 +17,15 @@ import com.fortyways.util.Graphic;
 import com.fortyways.util.Rectangle;
 import com.fortyways.util.StageToBattleTransfer;
 import com.stage.graphics.DeckPanel;
+import com.stage.graphics.InventoryPanel;
 
 public class EncounterState extends State {
-	public int encounterCount;
-	public int encounterAmount;
+	public int encounterCount=0;
+	public int encounterAmount=10;
+	private ArrayList<Encounter> plannedEncounters=new ArrayList<>();
 	private DeckPanel deckPanel;
+	private InventoryPanel inventoryPanel;
+	private boolean inInventoryPanel=false;
 	private boolean inDeckPanel=false;
 	private Rectangle panelRect=new Rectangle(DnS.WIDTH/2, DnS.HEIGHT/2, 500, 300);
 	
@@ -84,7 +90,7 @@ public class EncounterState extends State {
 			player.equipItem(currentOutcome.item);;
 		}
 		System.out.println(player.getMoney());
-		encounterAmount=10;
+		
 		player.updateDisplays();
 	}
 
@@ -94,15 +100,15 @@ public class EncounterState extends State {
 			mouse.x=Gdx.input.getX();
 			mouse.y=Gdx.input.getY();
 			cam.unproject(mouse);
-			if(!currentEncounter.chosen&&!inDeckPanel)
-			currentEncounter.handleInput(mouse.x, mouse.y);
+			if(!currentEncounter.chosen&&!inDeckPanel&&!inInventoryPanel)
+			currentEncounter.handleInput(mouse.x, mouse.y,player);
 			else{
-			if(currentEncounter.continueOption.background.Touched(mouse.x, mouse.y)&&!inDeckPanel){
+			if(currentEncounter.continueOption.background.Touched(mouse.x, mouse.y)&&!inDeckPanel&&!inInventoryPanel){
 				getNewEncounter();
 				
 			}
 			}			
-			if(currentEncounter.chosen&&!inDeckPanel){
+			if(currentEncounter.chosen&&!inDeckPanel&&!inInventoryPanel){
 				currentOutcome=currentEncounter.chosenOption.receiveOutcome();
 				currentEncounter.chosenOutcome=currentOutcome;
 				if(!currentOutcome.startBattle){
@@ -123,6 +129,9 @@ public class EncounterState extends State {
 				}
 				if(currentOutcome.famegain!=0){
 					player.setFame(player.getFame()+currentOutcome.famegain);
+				}
+				if(currentOutcome.awardCards.size()!=0){
+					player.addCard(currentOutcome.awardCards);
 				}
 				if(currentOutcome.itemgain){
 					if(currentOutcome.item==null)
@@ -151,6 +160,17 @@ public class EncounterState extends State {
 				inDeckPanel=true;
 			}
 			
+			if(inInventoryPanel){
+				if(!InventoryPanel.rect.Touched(mouse.x, mouse.y)){
+					inInventoryPanel=false;
+				}
+				else
+				inventoryPanel.handleInput(mouse.x, mouse.y);
+			}
+			if(!inInventoryPanel&&InventoryButton.Touched(mouse.x, mouse.y)){
+				inventoryPanel=new InventoryPanel(player);
+				inInventoryPanel=true;
+			}
 			
 			
 		}
@@ -198,6 +218,9 @@ public class EncounterState extends State {
 		DeckButton.render(sb);
 		if(inDeckPanel){
 		deckPanel.render(sb);
+		}
+		if(inInventoryPanel){
+		inventoryPanel.render(sb);
 		}
 		sb.end();
 	}
