@@ -41,10 +41,10 @@ public class DnS extends ApplicationAdapter {
 		ItemStorage.init();
 		EncounterStorage.init();
 		//gsm.set(new StageState(gsm));
-		gsm.set(new EncounterState(gsm));
+		//gsm.set(new EncounterState(gsm));
 		//gsm.set(new MainMenuState(gsm));
 		//gsm.set(new BattleState(gsm));
-		//gsm.set(new HeroSelectState(gsm));
+		gsm.set(new HeroSelectState(gsm));
 		
 	}
 
