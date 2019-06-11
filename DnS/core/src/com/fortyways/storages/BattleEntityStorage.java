@@ -34,7 +34,7 @@ public class BattleEntityStorage {
 		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
 		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
 		tempdeck.add(CardStorage.getCard("TestWeakAttack1"));
-		tempdeck.add(CardStorage.getCard("SummonGoblin"));
+		//tempdeck.add(CardStorage.getCard("SummonGoblin"));
 		decks.put("goblin-berserk", tempdeck);
 		tempdeck=new ArrayList<>();
 		tempdeck.add(CardStorage.getCard("TestRangedAttack1"));
