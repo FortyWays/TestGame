@@ -24,16 +24,17 @@ public class Item extends Rectangle{
 	private TextureRegion itemslot=DnS.res.getAtlas("pack").findRegion("ItemSlot");
 	public ItemPanel panel;
 	private String className="";
-	private String slot="";
+	static public enum Slot { 
+		ARMOR, HELM, PRIMARY, SECONDARY, MISCELLANEOUS;};
+	private Slot slot;
 	private float relativeX;
 	private float relativeY;
-	
+	public boolean equipped=false;
 	
 	
 	public Item (String name,String description,int cost,
 			ItemEffectAttributes[] itemInstructions, TextureRegion texture) {
-		super(0, 0, 50, 50);
-		
+		super(0, 0, 50, 50);	
 		this.itemInstructions=itemInstructions;
 		this.sprite=texture;
 		this.name=name;
@@ -41,10 +42,12 @@ public class Item extends Rectangle{
 		this.cost=cost;
 		this.cards=new ArrayList<>();
 	}
+	
 	public Item() {
 		super(0,0,0,0);
 		//dont use this evah
 	}
+	
 	public void setUpPanel(){
 		panel=new ItemPanel(name);
 		equipButton=new Graphic(DnS.WIDTH/2, DnS.HEIGHT/2-80, 80, 30,
@@ -69,8 +72,8 @@ public class Item extends Rectangle{
 		equipButton.render(spriteBatch);
 	}
 	public void render(SpriteBatch spriteBatch){
-		spriteBatch.draw(itemslot, relativeX, relativeY,40,40);
-		spriteBatch.draw(sprite, relativeX, relativeY,40,40);
+		spriteBatch.draw(itemslot, relativeX, relativeY,width,height);
+		spriteBatch.draw(sprite, relativeX, relativeY,width,height);
 	}
 
 	public void Equip(EncounterPlayer player){
@@ -78,22 +81,26 @@ public class Item extends Rectangle{
 			player.items.add(this);
 		}
 		for(Item item:player.equipped){
-			if(item.slot==this.slot&&this.slot!=""){
-				item.Unequip(player);
+			if(item.slot==this.slot&&slot!=Item.Slot.MISCELLANEOUS){
+				item.Unequip(player);	
 				break;
 			}
 		}
+		this.equipped=true;
 		player.equipped.add(this);
 		ItemEffects.ApplyEffect(itemInstructions, player);
 	}
 	public void Unequip(EncounterPlayer player){
 		player.equipped.remove(this);
+		this.equipped=false;
 		ItemEffects.RemoveEffect(itemInstructions, player);
 	}
 	public void setRelativeX(float relativeX) {
+		this.x=relativeX+width/2;
 		this.relativeX = relativeX;
 	}
 	public void setRelativeY(float relativeY) {
+		this.y=relativeY+height/2;
 		this.relativeY = relativeY;
 	}
 	public float getRelativeY() {
@@ -117,14 +124,20 @@ public class Item extends Rectangle{
 	public void setClassName(String className) {
 		this.className = className;
 	}
-	public void setSlot(String slot) {
+	public void setSlot(Slot slot) {
 		this.slot = slot;
 	}
-	public String getSlot() {
+	public Slot getSlot() {
 		return slot;
 	}
 	public String getClassName() {
 		return className;
+	}
+	public int getCost() {
+		return cost;
+	}
+	public ItemEffectAttributes[] getItemInstructions() {
+		return itemInstructions;
 	}
 	
 }
